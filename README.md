@@ -1,29 +1,26 @@
-# README #
+# Install environment:
+``
+npm install -g expo-cli
+``
+or
+``npm install expo-cli --global --no-optional``
+or
+``yarn global add expo-cli``
 
-This README would normally document whatever steps are necessary to get your application up and running.
+``
+expo init AwesomeProject
+``
 
-### What is this repository for? ###
+``
+cd AwesomeProject
+``
 
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+``
+npm start # you can also use: expo start
+``
 
-### How do I get set up? ###
+This will start a development server for you.
 
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
+#Running your React Native application
+Install the Expo client app on your iOS or Android phone and connect to the same wireless network as your computer. On Android, use the Expo app to scan the QR code from your terminal to open your project. On iOS, follow on-screen instructions to get a link.
 
-### Contribution guidelines ###
-
-* Writing tests
-* Code review
-* Other guidelines
-
-### Who do I talk to? ###
-
-* Repo owner or admin
-* Other community or team contact

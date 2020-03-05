@@ -47,7 +47,7 @@ export default function HomeScreen(props) {
         clearInterval(audioTimeout);
         setIsFocused(false);
     }, []);
-console.log(CSS.container);
+// console.log(CSS.container);
     return <View style={CSS.container}>
         <ViewAnimatedCollectible style={{
             borderSize: 10,

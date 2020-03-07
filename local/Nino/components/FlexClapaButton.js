@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from "react";
 import {BODY_DIAMETER, BORDER_WIDTH, WIDTH} from "../constants/Layout";
-import {TouchableWithoutFeedback, View} from "react-native";
+import {TouchableWithoutFeedback, View, Text} from "react-native";
 import {Ionicons} from "@expo/vector-icons";
 
-export default function FlexClapaButton({style, ...props}) {
+export default function FlexClapaButton({style, keyColor, ...props}) {
 
     const [firstClick, setFirstClick] = useState(false);
     const [timeoutHandle, setTimeoutHandle] = useState(null);
@@ -11,48 +11,56 @@ export default function FlexClapaButton({style, ...props}) {
     useEffect(() => () => timeoutHandle && clearTimeout(timeoutHandle), [])
 
     return (
-        <TouchableWithoutFeedback
-            accessibilityIgnoresInvertColors={true}
-            pressRetentionOffset={{top: 0, left: 0, bottom: 0, right: 0}}
-            onPressIn={async () => {
-
-                if (firstClick) {
-
-                    setFirstClick(false);
-                    clearTimeout(timeoutHandle);
-                    setTimeoutHandle(null);
-                    props.stopAction();
-                } else {
-
-                    props.callback(props.title);
-                    console.log(props.currentNote);
-                    props.playAction().then((playbackStatus) => {
-
-                        !playbackStatus.isLooping && setTimeoutHandle(setTimeout(() => {
-
-                            console.log(props.title, props.currentNote);
-                            props.stopAction();
-                            setFirstClick(false);
-                        }, props.position.end));
-                    })/*.catch(e => console.log(e))*/;
-                    setFirstClick(true);
-                }
-            }} title={props.title}><View style={{
-            ...style,
-            alignItems: 'center', justifyContent: 'center',
-            opacity: !firstClick ? 1 : .99
-        }}>
-            <View style={{
+        <View
+            style={{
+                ...style,
+                borderTopWidth: 1,
+                borderTopColor: "#ff0000",
                 alignItems: 'center', justifyContent: 'center',
-                borderWidth: 1,
-                borderColor: "#000000",
-                width: WIDTH / 14,
-                height: "100%",
-                backgroundColor: firstClick ? style.backgroundColor || "#bbbbbb" : "#ffffff",
-                opacity: 1
+                opacity: !firstClick ? 1 : .99
             }}>
-                <Ionicons name={props.ionicon} size={BODY_DIAMETER / 2} color={style.color || "black"}/>
-            </View></View>
-        </TouchableWithoutFeedback>
+            <TouchableWithoutFeedback
+                accessibilityIgnoresInvertColors={true}
+                pressRetentionOffset={{top: 0, left: 0, bottom: 0, right: 0}}
+                onPressIn={async () => {
+
+                    if (firstClick) {
+
+                        setFirstClick(false);
+                        clearTimeout(timeoutHandle);
+                        setTimeoutHandle(null);
+                        props.stopAction();
+                    } else {
+
+                        props.callback(props.title);
+                        console.log(props.currentNote);
+                        props.playAction().then((playbackStatus) => {
+
+                            !playbackStatus.isLooping && setTimeoutHandle(setTimeout(() => {
+
+                                console.log(props.title, props.currentNote);
+                                props.stopAction();
+                                setFirstClick(false);
+                            }, props.position.end));
+                        })/*.catch(e => console.log(e))*/;
+                        setFirstClick(true);
+                    }
+                }} title={props.title}>
+                <View style={{
+                    height: "100%",
+                    width: "100%",
+                    borderTopWidth: 1,
+                    borderTopColor: "#ffffff",
+                    backgroundColor: firstClick ? "#bbbbbb" : style.backgroundColor
+                }}>
+                    <Text/>
+                    {props.ionicon && <Ionicons
+                        style={{position: "absolute", left: (WIDTH / 14  - BODY_DIAMETER / 2) / 2, bottom: BODY_DIAMETER / 2}}
+                        name={props.ionicon} size={BODY_DIAMETER / 2}
+                        color={firstClick ? "#ffffff" : "#ffb700"}/>}
+                </View>
+            </TouchableWithoutFeedback>
+        </View>
+
     );
 }

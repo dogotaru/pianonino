@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import {BODY_DIAMETER, BORDER_WIDTH, WIDTH} from "../constants/Layout";
 import {TouchableWithoutFeedback, View, Text} from "react-native";
 import {Ionicons} from "@expo/vector-icons";
+import {Audio} from "expo-av";
 
 export default function FlexClapaButton({style, keyColor, ...props}) {
 
@@ -9,7 +10,7 @@ export default function FlexClapaButton({style, keyColor, ...props}) {
     const [timeoutHandle, setTimeoutHandle] = useState(null);
 
     useEffect(() => () => timeoutHandle && clearTimeout(timeoutHandle), [])
-
+// console.log(timeoutHandle);
     return (
         <View
             style={{
@@ -26,26 +27,41 @@ export default function FlexClapaButton({style, keyColor, ...props}) {
 
                     if (firstClick) {
 
-                        setFirstClick(false);
-                        clearTimeout(timeoutHandle);
-                        setTimeoutHandle(null);
-                        props.stopAction();
                     } else {
 
-                        props.callback(props.title);
-                        console.log(props.currentNote);
-                        props.playAction().then((playbackStatus) => {
+                        try {
 
-                            !playbackStatus.isLooping && setTimeoutHandle(setTimeout(() => {
+                            setTimeout(() => { setFirstClick(false); }, 100);
 
-                                console.log(props.title, props.currentNote);
-                                props.stopAction();
-                                setFirstClick(false);
-                            }, props.position.end));
-                        })/*.catch(e => console.log(e))*/;
+                            const audio = props.getAudioRunner();
+                            if (audio) {
+
+                                audio
+                                    .playFromPositionAsync(props.position.start)
+                                    .then(async playbackStatus => {
+
+                                        // clearTimeout(timeoutHandle);
+                                        setTimeoutHandle(setTimeout(() => {
+
+                                            // console.log("_")
+                                            audio.stopAsync();
+                                            props.returnAudioRunner(audio);
+
+                                        }, props.position.end));
+                                    })
+                                    .catch(error => {
+                                        console.log(error)
+                                    })
+                            } else {
+                                console.log("...");
+                            }
+                        } catch (error) {
+                            console.log(error)
+                        }
+
                         setFirstClick(true);
                     }
-                }} title={props.title}>
+                }} title={props.key}>
                 <View style={{
                     height: "100%",
                     width: "100%",
@@ -54,10 +70,15 @@ export default function FlexClapaButton({style, keyColor, ...props}) {
                     backgroundColor: firstClick ? "#bbbbbb" : style.backgroundColor
                 }}>
                     <Text/>
-                    {props.ionicon && <Ionicons
-                        style={{position: "absolute", left: (WIDTH / 14  - BODY_DIAMETER / 2) / 2, bottom: BODY_DIAMETER / 2}}
-                        name={props.ionicon} size={BODY_DIAMETER / 2}
-                        color={firstClick ? "#ffffff" : "#ffb700"}/>}
+                    {props.ionicon && <Text
+                        style={{
+                            fontFamily: 'keyicons',
+                            position: "absolute",
+                            left: (WIDTH / 14 - BODY_DIAMETER / 2) / 2,
+                            bottom: BODY_DIAMETER / 2,
+                            color: firstClick ? "#ffffff" : "#ffb700",
+                            fontSize: BODY_DIAMETER / 2
+                        }}>{props.ionicon}</Text>}
                 </View>
             </TouchableWithoutFeedback>
         </View>

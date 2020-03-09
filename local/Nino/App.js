@@ -4,6 +4,7 @@ import {AppLoading} from "expo";
 import {Asset} from 'expo-asset';
 import AppContainer from './navigation/AppNavigator';
 import {Audio} from "expo-av";
+import * as Font from 'expo-font';
 
 export default function App(props) {
     const [isLoadingComplete, setLoadingComplete] = useState(false);
@@ -41,29 +42,33 @@ export default function App(props) {
         // n31: new Audio.Sound(),
         // n32: new Audio.Sound(),
         // n33: new Audio.Sound(),
-        mixNotes05: new Audio.Sound(),
-        mixNotes06: new Audio.Sound(),
-        mixNotes07: new Audio.Sound(),
-        mixNotes08: new Audio.Sound(),
-        mixNotes09: new Audio.Sound(),
-        mixNotes10: new Audio.Sound(),
-        mixNotes11: new Audio.Sound(),
-        mixNotes12: new Audio.Sound(),
-        mixNotes13: new Audio.Sound(),
-        mixNotes14: new Audio.Sound(),
-        mixNotes15: new Audio.Sound(),
-        mixNotes16: new Audio.Sound(),
-        mixNotes17: new Audio.Sound(),
-        mixNotes18: new Audio.Sound(),
-        mixNotes19: new Audio.Sound(),
-        mixNotes20: new Audio.Sound(),
-        mixNotes21: new Audio.Sound(),
-        mixNotes22: new Audio.Sound(),
-        mixNotes23: new Audio.Sound(),
-        mixNotes24: new Audio.Sound(),
-        mixNotes25: new Audio.Sound(),
-        mixNotes26: new Audio.Sound(),
-        mixNotes27: new Audio.Sound(),
+        // mixNotes: new Audio.Sound(),
+        mixNotes01: new Audio.Sound(),
+        mixNotes02: new Audio.Sound(),
+        mixNotes03: new Audio.Sound(),
+        // mixNotes05: new Audio.Sound(),
+        // mixNotes06: new Audio.Sound(),
+        // mixNotes07: new Audio.Sound(),
+        // mixNotes08: new Audio.Sound(),
+        // mixNotes09: new Audio.Sound(),
+        // mixNotes10: new Audio.Sound(),
+        // mixNotes11: new Audio.Sound(),
+        // mixNotes12: new Audio.Sound(),
+        // mixNotes13: new Audio.Sound(),
+        // mixNotes14: new Audio.Sound(),
+        // mixNotes15: new Audio.Sound(),
+        // mixNotes16: new Audio.Sound(),
+        // mixNotes17: new Audio.Sound(),
+        // mixNotes18: new Audio.Sound(),
+        // mixNotes19: new Audio.Sound(),
+        // mixNotes20: new Audio.Sound(),
+        // mixNotes21: new Audio.Sound(),
+        // mixNotes22: new Audio.Sound(),
+        // mixNotes23: new Audio.Sound(),
+        // mixNotes24: new Audio.Sound(),
+        // mixNotes25: new Audio.Sound(),
+        // mixNotes26: new Audio.Sound(),
+        // mixNotes27: new Audio.Sound(),
     });
 
     useEffect(() => {
@@ -114,38 +119,42 @@ export default function App(props) {
       // assets.n31.loadAsync(require("./assets/audio/notes/31-f-5.mp3")),
       // assets.n32.loadAsync(require("./assets/audio/notes/32-g5.mp3")),
       // assets.n33.loadAsync(require("./assets/audio/notes/33-g-5.mp3")),
-      assets.mixNotes05.loadAsync(require("./assets/audio/notes/mix-notes-03.mp3")),
-      assets.mixNotes06.loadAsync(require("./assets/audio/notes/mix-notes-03.mp3")),
-      assets.mixNotes07.loadAsync(require("./assets/audio/notes/mix-notes-03.mp3")),
-      assets.mixNotes08.loadAsync(require("./assets/audio/notes/mix-notes-03.mp3")),
-      assets.mixNotes09.loadAsync(require("./assets/audio/notes/mix-notes-03.mp3")),
-      assets.mixNotes10.loadAsync(require("./assets/audio/notes/mix-notes-03.mp3")),
-      assets.mixNotes11.loadAsync(require("./assets/audio/notes/mix-notes-03.mp3")),
-      assets.mixNotes12.loadAsync(require("./assets/audio/notes/mix-notes-03.mp3")),
-      assets.mixNotes13.loadAsync(require("./assets/audio/notes/mix-notes-03.mp3")),
-      assets.mixNotes14.loadAsync(require("./assets/audio/notes/mix-notes-03.mp3")),
-      assets.mixNotes15.loadAsync(require("./assets/audio/notes/mix-notes-03.mp3")),
-      assets.mixNotes16.loadAsync(require("./assets/audio/notes/mix-notes-03.mp3")),
-      assets.mixNotes17.loadAsync(require("./assets/audio/notes/mix-notes-03.mp3")),
-      assets.mixNotes18.loadAsync(require("./assets/audio/notes/mix-notes-03.mp3")),
-      assets.mixNotes19.loadAsync(require("./assets/audio/notes/mix-notes-03.mp3")),
-      assets.mixNotes20.loadAsync(require("./assets/audio/notes/mix-notes-03.mp3")),
-      assets.mixNotes21.loadAsync(require("./assets/audio/notes/mix-notes-03.mp3")),
-      assets.mixNotes22.loadAsync(require("./assets/audio/notes/mix-notes-03.mp3")),
-      assets.mixNotes23.loadAsync(require("./assets/audio/notes/mix-notes-03.mp3")),
-      assets.mixNotes24.loadAsync(require("./assets/audio/notes/mix-notes-03.mp3")),
-      assets.mixNotes25.loadAsync(require("./assets/audio/notes/mix-notes-03.mp3")),
-      assets.mixNotes26.loadAsync(require("./assets/audio/notes/mix-notes-03.mp3")),
-      assets.mixNotes27.loadAsync(require("./assets/audio/notes/mix-notes-03.mp3")),
+      // assets.mixNotes.loadAsync(require("./assets/audio/notes/mix-notes-03.mp3")),
+      assets.mixNotes01.loadAsync(require("./assets/audio/notes/mix-notes-03.mp3")),
+      assets.mixNotes02.loadAsync(require("./assets/audio/notes/mix-notes-03.mp3")),
+      assets.mixNotes03.loadAsync(require("./assets/audio/notes/mix-notes-03.mp3")),
+      // assets.mixNotes05.loadAsync(require("./assets/audio/notes/mix-notes-03.mp3")),
+      // assets.mixNotes06.loadAsync(require("./assets/audio/notes/mix-notes-03.mp3")),
+      // assets.mixNotes07.loadAsync(require("./assets/audio/notes/mix-notes-03.mp3")),
+      // assets.mixNotes08.loadAsync(require("./assets/audio/notes/mix-notes-03.mp3")),
+      // assets.mixNotes09.loadAsync(require("./assets/audio/notes/mix-notes-03.mp3")),
+      // assets.mixNotes10.loadAsync(require("./assets/audio/notes/mix-notes-03.mp3")),
+      // assets.mixNotes11.loadAsync(require("./assets/audio/notes/mix-notes-03.mp3")),
+      // assets.mixNotes12.loadAsync(require("./assets/audio/notes/mix-notes-03.mp3")),
+      // assets.mixNotes13.loadAsync(require("./assets/audio/notes/mix-notes-03.mp3")),
+      // assets.mixNotes14.loadAsync(require("./assets/audio/notes/mix-notes-03.mp3")),
+      // assets.mixNotes15.loadAsync(require("./assets/audio/notes/mix-notes-03.mp3")),
+      // assets.mixNotes16.loadAsync(require("./assets/audio/notes/mix-notes-03.mp3")),
+      // assets.mixNotes17.loadAsync(require("./assets/audio/notes/mix-notes-03.mp3")),
+      // assets.mixNotes18.loadAsync(require("./assets/audio/notes/mix-notes-03.mp3")),
+      // assets.mixNotes19.loadAsync(require("./assets/audio/notes/mix-notes-03.mp3")),
+      // assets.mixNotes20.loadAsync(require("./assets/audio/notes/mix-notes-03.mp3")),
+      // assets.mixNotes21.loadAsync(require("./assets/audio/notes/mix-notes-03.mp3")),
+      // assets.mixNotes22.loadAsync(require("./assets/audio/notes/mix-notes-03.mp3")),
+      // assets.mixNotes23.loadAsync(require("./assets/audio/notes/mix-notes-03.mp3")),
+      // assets.mixNotes24.loadAsync(require("./assets/audio/notes/mix-notes-03.mp3")),
+      // assets.mixNotes25.loadAsync(require("./assets/audio/notes/mix-notes-03.mp3")),
+      // assets.mixNotes26.loadAsync(require("./assets/audio/notes/mix-notes-03.mp3")),
+      // assets.mixNotes27.loadAsync(require("./assets/audio/notes/mix-notes-03.mp3")),
 
 
       Asset.loadAsync([
         require('./assets/images/play-button.png')
       ]),
 
-      // Font.loadAsync({
-      //   'grafitty': require('./assets/fonts/NMFBurner-Regular.otf')
-      // })
+      Font.loadAsync({
+        'keyicons': require('./assets/fonts/fontello.ttf')
+      })
     ]);
   }
 

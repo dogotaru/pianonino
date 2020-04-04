@@ -8,15 +8,20 @@ export const CSS_PIANO_SCREEN = StyleSheet.create({
 export const CSS_HOME_SCREEN = StyleSheet.create({
     container: {
         flex: 1,
-        alignItems: 'center',
+        flexDirection: 'row',
         justifyContent: 'center',
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        bottom: 0,
+        right: 0,
+        alignItems: 'center',
         paddingHorizontal: 10,
         backgroundColor: "#000000",
-        width: WIDTH,
-        height: HEIGHT
-    },
-    playButton: {
-        height: 80, resizeMode: 'contain'
+        // borderWidth: 5,
+        // borderColor: "#ffff00",
+        // width: WIDTH,
+        // height: HEIGHT
     },
     collectible: {
         backgroundColor: "#83ff00",

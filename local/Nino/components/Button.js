@@ -30,7 +30,7 @@ export default function Button(props) {
     return (
         <View style={{
             position: "absolute",
-            zIndex: 1,
+            zIndex: 2,
             alignItems: 'center',
             justifyContent: 'center',
             ...props.position
@@ -56,17 +56,17 @@ export default function Button(props) {
         }} title="Go to Home">
             <View style={{
                 alignItems: 'center', justifyContent: 'center',
-                borderWidth: BORDER_WIDTH,
+                borderRightWidth: 1,
                 borderColor: "#00CC00",
-                borderRadius: BODY_DIAMETER,
+                // borderRadius: BODY_DIAMETER,
                 width: BODY_DIAMETER / 1.3,
-                height: BODY_DIAMETER / 1.3,
-                backgroundColor: "#6A0DAD",
+                height: BODY_DIAMETER / 1.5,
+                // backgroundColor: "#6A0DAD",
                 opacity: !firstClick && !props.singleClick ? .4 : 1
             }}>
-                <Ionicons name={props.ionicon} size={BODY_DIAMETER / 2} color="white"/>
+                <Ionicons name={props.ionicon} size={BODY_DIAMETER * 0.65} color={`${props.color || "#ffffff"}`} />
                 <TextAnimated numberOfLines={1} ellipsizeMode={"clip"} style={{
-                    position: 'absolute', left: BODY_DIAMETER / 1.3, width: dblTapAnimation.width, color: "#00CC00"
+                    position: 'absolute', left: BODY_DIAMETER / 1.2, width: dblTapAnimation.width, color: "#00CC00"
                 }}>Double tap</TextAnimated>
             </View>
         </TouchableWithoutFeedback></View>

@@ -6,6 +6,8 @@ ARG CHOSE_PROXY
 # COPY ./package.json /home/tmp_node_project
 # RUN cd /home/tmp_node_project && npm install -D
 
+# REACT_NATIVE_PACKAGER_HOSTNAME=192.168.1.2 ADB_IP=192.168.1.11
+
 USER root
 
 # installing stuff

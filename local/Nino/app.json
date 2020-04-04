@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Pianinonino",
-    "slug": "pandasystems-pianinonino",
+    "name": "Pianonino",
+    "slug": "pandasystems-pianonino",
     "privacy": "unlisted",
     "sdkVersion": "36.0.0",
     "platforms": [
@@ -23,12 +23,12 @@
       "**/*"
     ],
     "ios": {
-      "bundleIdentifier": "com.pandasystems.pianinonino",
+      "bundleIdentifier": "com.pandasystems.pianonino",
       "supportsTablet": true,
       "buildNumber": "1.0.0"
     },
     "android": {
-      "package": "com.pandasystems.pianinonino",
+      "package": "com.pandasystems.pianonino",
       "versionCode": 100,
       "permissions": []
     },
@@ -36,7 +36,8 @@
       "backgroundColor": "#000000"
     },
     "androidStatusBar": {
-      "backgroundColor": "#000000"
+      "backgroundColor": "#000000",
+      "translucent": false
     },
     "description": "~",
     "owner": "dogotaru"

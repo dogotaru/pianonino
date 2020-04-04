@@ -1,9 +1,11 @@
 import {StackActions} from 'react-navigation';
 import {useFocusState} from 'react-navigation-hooks';
 import React, {useEffect, useState} from "react";
-import {View, TouchableHighlight, Image} from "react-native";
+import {View, TouchableHighlight, Image, Text, TouchableWithoutFeedback} from "react-native";
 import {animated, useSpring} from "react-spring";
 import {CSS_HOME_SCREEN as CSS} from "../constants/Styles";
+import {BODY_DIAMETER} from "../constants/Layout";
+import {Ionicons} from "@expo/vector-icons";
 
 const ViewAnimatedCollectible = animated(View);
 
@@ -49,25 +51,35 @@ export default function HomeScreen(props) {
     }, []);
 // console.log(CSS.container);
     return <View style={CSS.container}>
-        <ViewAnimatedCollectible style={{
-            borderSize: 10,
-            borderColor: '#ff0000',
-            transform: [((_rotate) => { /*console.log('-----------',_rotate);*/
-                return _rotate;
-            })(rotate)]
-        }}/>
-        <TouchableHighlight underlayColor={"#ffffff"} onPress={() => {
 
-            const pushAction = StackActions.push({
-                routeName: 'Piano'
-            });
-            // assets.homeBackgroundMusic.stopAsync();
-            props.navigation.dispatch(pushAction);
-        }} title="Play">
-            <View style={{resizeMode: "contain"}}><Image
-                source={require('../assets/images/play-button.png')}
-                style={CSS.playButton}
-            /></View>
-        </TouchableHighlight>
+        <TouchableWithoutFeedback accessibilityIgnoresInvertColors={true} onPress={() => {
+
+            props.navigation.dispatch(StackActions.push({routeName: 'Composer'}));
+        }}>
+            <View>
+                <Ionicons name={'md-musical-note'} size={BODY_DIAMETER * 2.5} color="#00ff19"/>
+                <Text style={{color: '#00ff19', fontSize: BODY_DIAMETER / 3, textAlign: 'center'}}>Composer</Text>
+            </View>
+        </TouchableWithoutFeedback>
+        <View style={{width: BODY_DIAMETER}}/>
+        <TouchableWithoutFeedback accessibilityIgnoresInvertColors={true} onPress={() => {
+
+            props.navigation.dispatch(StackActions.push({routeName: 'PerformerSelector'}));
+        }}>
+            <View>
+                <Ionicons name={'md-musical-notes'} size={BODY_DIAMETER * 2.5} color="#00c4ff"/>
+                <Text style={{color: '#00c4ff', fontSize: BODY_DIAMETER / 3, textAlign: 'center'}}>Performer</Text>
+            </View>
+        </TouchableWithoutFeedback>
+        <View style={{width: BODY_DIAMETER}}/>
+        <TouchableWithoutFeedback accessibilityIgnoresInvertColors={true} onPress={() => {
+
+            props.navigation.dispatch(StackActions.push({routeName: 'Settings'}));
+        }}>
+            <View>
+                <Ionicons name={'md-settings'} size={BODY_DIAMETER * 2.5} color="#ffb700"/>
+                <Text style={{color: '#ffb700', fontSize: BODY_DIAMETER / 3, textAlign: 'center'}}>Settings</Text>
+            </View>
+        </TouchableWithoutFeedback>
     </View>;
 }

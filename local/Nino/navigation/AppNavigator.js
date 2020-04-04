@@ -3,7 +3,10 @@ import {Platform} from 'react-native';
 import {createAppContainer} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
 import HomeScreen from '../screens/HomeScreen';
-import PianoScreen from "../screens/PianoScreen";
+import ComposerScreen from "../screens/ComposerScreen";
+import PerformerScreen from "../screens/PerformerScreen";
+import PerformerSelectorScreen from "../screens/PerformerSelectorScreen";
+import SettingsScreen from "../screens/SettingsScreen";
 
 const config = Platform.select({
     web: {headerMode: 'screen'},
@@ -18,8 +21,26 @@ const Stack = createStackNavigator(
                 headerShown: false
             }
         },
-        Piano: {
-            screen: (screenProps) => <PianoScreen {...screenProps} />,
+        Composer: {
+            screen: (screenProps) => <ComposerScreen {...screenProps} />,
+            navigationOptions: {
+                headerShown: false
+            }
+        },
+        PerformerSelector: {
+            screen: (screenProps) => <PerformerSelectorScreen {...screenProps} />,
+            navigationOptions: {
+                headerShown: false
+            }
+        },
+        Performer: {
+            screen: (screenProps) => <PerformerScreen {...screenProps} />,
+            navigationOptions: {
+                headerShown: false
+            }
+        },
+        Settings: {
+            screen: (screenProps) => <SettingsScreen {...screenProps} />,
             navigationOptions: {
                 headerShown: false
             }

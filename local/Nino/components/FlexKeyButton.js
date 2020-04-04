@@ -4,7 +4,7 @@ import {TouchableWithoutFeedback, View, Text} from "react-native";
 import {Ionicons} from "@expo/vector-icons";
 import {Audio} from "expo-av";
 
-export default function FlexClapaButton({style, keyColor, ...props}) {
+export default function FlexKeyButton({style, keyColor, ...props}) {
 
     const [firstClick, setFirstClick] = useState(false);
     const [timeoutHandle, setTimeoutHandle] = useState(null);
@@ -36,6 +36,7 @@ export default function FlexClapaButton({style, keyColor, ...props}) {
                             const audio = props.getAudioRunner();
                             if (audio) {
 
+                                props.callback(props.ionicon);
                                 audio
                                     .playFromPositionAsync(props.position.start)
                                     .then(async playbackStatus => {
@@ -46,6 +47,7 @@ export default function FlexClapaButton({style, keyColor, ...props}) {
                                             // console.log("_")
                                             audio.stopAsync();
                                             props.returnAudioRunner(audio);
+                                            // props.callback(null);
 
                                         }, props.position.end));
                                     })
@@ -65,19 +67,22 @@ export default function FlexClapaButton({style, keyColor, ...props}) {
                 <View style={{
                     height: "100%",
                     width: "100%",
+                    alignItems: 'center',
                     borderTopWidth: 1,
                     borderTopColor: "#ffffff",
                     backgroundColor: firstClick ? "#bbbbbb" : style.backgroundColor
                 }}>
                     <Text/>
-                    {props.ionicon && <Text
+                    {props.ton && <Text
                         style={{
                             fontFamily: 'keyicons',
                             position: "absolute",
-                            left: (WIDTH / 14 - BODY_DIAMETER / 2) / 2,
+                            // left: (WIDTH / 15 - BODY_DIAMETER / 2) / 2,
                             bottom: BODY_DIAMETER / 2,
-                            color: firstClick ? "#ffffff" : "#ffb700",
-                            fontSize: BODY_DIAMETER / 2
+                            color: firstClick ? "#ffffff" : props.color,
+                            fontSize: BODY_DIAMETER / 2,
+                            // borderWidth: 1,
+                            // borderColor: "#ff0000"
                         }}>{props.ionicon}</Text>}
                 </View>
             </TouchableWithoutFeedback>

@@ -1,55 +1,47 @@
 import {StackActions} from 'react-navigation';
-import {useFocusState} from 'react-navigation-hooks';
+import {useIsFocused} from 'react-navigation-hooks';
 import React, {useEffect, useState} from "react";
 import {View, TouchableHighlight, Image, Text, TouchableWithoutFeedback} from "react-native";
 import {animated, useSpring} from "react-spring";
 import {CSS_HOME_SCREEN as CSS} from "../constants/Styles";
-import {BODY_DIAMETER} from "../constants/Layout";
+import {BODY_DIAMETER, ViewAnimated} from "../constants/Layout";
 import {Ionicons} from "@expo/vector-icons";
-
-const ViewAnimatedCollectible = animated(View);
 
 export default function HomeScreen(props) {
 
-    const [rotate, setRotate] = useSpring(() => ({from: {rotate: "45deg"}}));
-    const [collectibleInterval, setCollectibleInterval] = useState(null);
+    const [rotate, setRotate] = useSpring(() => ({from: {rotate: "0deg"}}));
+    const [settingsInterval, setSettingsInterval] = useState(null);
     const [audioTimeout, setAudioTimeout] = useState(null);
     const [assets] = useState(props.screenProps.assets);
-    const [isFocused, setIsFocused] = useState(false);
-    const focusState = useFocusState();
+    const isFocused = useIsFocused();
 
-    const rotateDiamond = () => {
+    const rotateSettings = () => {
 
-        setRotate({to: [{rotate: "405deg"}, {rotate: "45deg"}], config: {mass: 1, tension: 180, friction: 12}});
+        setRotate({to: [{rotate: "360deg"}, {rotate: "0deg"}], config: {mass: 1, tension: 50, friction: 12}});
     };
 
     useEffect(() => {
 
         if (isFocused) {
 
-            rotateDiamond();
-            setCollectibleInterval(setInterval(rotateDiamond, 2500));
-            // setAudioTimeout(setTimeout(() => assets.homeBackgroundMusic.replayAsync(), 1000));
+            rotateSettings();
+            setSettingsInterval(setInterval(rotateSettings, 2500));
+            setAudioTimeout(setTimeout(() => assets.chopinGrandeValseBrillanteInE.replayAsync(), 1000));
         } else {
 
-            // assets.homeBackgroundMusic.stopAsync();
-            clearInterval(collectibleInterval);
+            assets.chopinGrandeValseBrillanteInE.stopAsync();
+            clearInterval(settingsInterval);
             clearInterval(audioTimeout);
         }
     }, [isFocused]);
 
-    useEffect(() => {
-        setIsFocused(focusState.isFocused);
-    }, [focusState]);
-
     useEffect(() => () => {
 
-        // assets.homeBackgroundMusic.stopAsync();
-        clearInterval(collectibleInterval);
+        assets.chopinGrandeValseBrillanteInE.stopAsync();
+        clearInterval(settingsInterval);
         clearInterval(audioTimeout);
-        setIsFocused(false);
     }, []);
-// console.log(CSS.container);
+
     return <View style={CSS.container}>
 
         <TouchableWithoutFeedback accessibilityIgnoresInvertColors={true} onPress={() => {
@@ -77,8 +69,24 @@ export default function HomeScreen(props) {
             props.navigation.dispatch(StackActions.push({routeName: 'Settings'}));
         }}>
             <View>
-                <Ionicons name={'md-settings'} size={BODY_DIAMETER * 2.5} color="#ffb700"/>
-                <Text style={{color: '#ffb700', fontSize: BODY_DIAMETER / 3, textAlign: 'center'}}>Settings</Text>
+                <ViewAnimated style={{
+                    transform: [((_rotate) => { /*console.log('-----------',_rotate);*/
+                        return _rotate;
+                    })(rotate)]
+                }}>
+                    <Ionicons name={'md-settings'} size={BODY_DIAMETER * 2.5} color="#ffb700"/>
+                </ViewAnimated>
+                <Text style={{color: '#ffb700', fontSize: BODY_DIAMETER / 3, textAlign: 'center'}}>Chose</Text>
+            </View>
+        </TouchableWithoutFeedback>
+        <View style={{width: BODY_DIAMETER}}/>
+        <TouchableWithoutFeedback accessibilityIgnoresInvertColors={true} onPress={() => {
+
+            props.navigation.dispatch(StackActions.push({routeName: 'Help'}));
+        }}>
+            <View>
+                <Ionicons name={'md-help'} size={BODY_DIAMETER * 2.5} color="#d900ff"/>
+                <Text style={{color: '#d900ff', fontSize: BODY_DIAMETER / 3, textAlign: 'center'}}>How to</Text>
             </View>
         </TouchableWithoutFeedback>
     </View>;

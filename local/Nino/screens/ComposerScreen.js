@@ -144,9 +144,8 @@ export default function ComposerScreen(props) {
                 }}
                 assets={props.screenProps.assets}
                 callback={async (key) => {
-                    setCurrentNote([key, ...currentNote.slice(0, WIDTH / (BODY_DIAMETER * 1.65))])
+                    setCurrentNote([key, ...currentNote.slice(0, WIDTH / (BODY_DIAMETER * 1.69))])
                 }}
-
             />
         </View>
     );

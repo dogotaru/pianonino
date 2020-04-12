@@ -7,6 +7,7 @@ import ComposerScreen from "../screens/ComposerScreen";
 import PerformerScreen from "../screens/PerformerScreen";
 import PerformerSelectorScreen from "../screens/PerformerSelectorScreen";
 import SettingsScreen from "../screens/SettingsScreen";
+import HelpScreen from "../screens/HelpScreen";
 
 const config = Platform.select({
     web: {headerMode: 'screen'},
@@ -41,6 +42,12 @@ const Stack = createStackNavigator(
         },
         Settings: {
             screen: (screenProps) => <SettingsScreen {...screenProps} />,
+            navigationOptions: {
+                headerShown: false
+            }
+        },
+        Help: {
+            screen: (screenProps) => <HelpScreen {...screenProps} />,
             navigationOptions: {
                 headerShown: false
             }

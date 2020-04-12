@@ -43,7 +43,7 @@ export default function PerformerScreen(props) {
             props.screenProps.assets.clap.stopAsync();
         }
     }, []);
-
+// console.log(currentNote);
     return (
         <View style={CSS.container}>
 
@@ -127,7 +127,7 @@ export default function PerformerScreen(props) {
                     color: currentNote[0].color,
                     // borderWidth: 1,
                     // borderColor: '#ff0000'
-                }}>{currentNote[0].ionicon[0]}</Text>
+                }}>{props.screenProps.assets.noteIconMapping[currentNote[0].ionicon[0]]}</Text>
                 <Text style={{
                     fontFamily: 'keyicons',
                     textAlign: 'center',
@@ -170,7 +170,7 @@ export default function PerformerScreen(props) {
                             textAlign: 'center',
                             fontSize: BODY_DIAMETER * 0.8,
                             color: item.color
-                        }}>{item.ionicon[0]}</Text>
+                        }}>{props.screenProps.assets.noteIconMapping[item.ionicon[0]]}</Text>
                         <Text style={{
                             fontFamily: 'keyicons',
                             textAlign: 'center',
@@ -200,7 +200,10 @@ export default function PerformerScreen(props) {
                 }}
                 assets={props.screenProps.assets}
                 callback={async (key) => {
-                    if (currentNote.length > 0 && key.ionicon === currentNote[0].ionicon && key.color === currentNote[0].color) {
+                    // sa ma uit la diezi
+                    // console.log(key, key.ionicon, currentNote[0].ionicon, props.screenProps.assets.noteIconMapping[currentNote[0].ionicon[0]]);
+                    const matched = key.ionicon === `${props.screenProps.assets.noteIconMapping[currentNote[0].ionicon[0]]}${currentNote[0].ionicon[1] || ""}`;
+                    if (currentNote.length > 0 && matched && key.color === currentNote[0].color) {
 
                         setCurrentNote([...currentNote.slice(1)])
                     }

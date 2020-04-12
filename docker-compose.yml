@@ -6,13 +6,13 @@ services:
         user: node
         build:
             context: .
-            dockerfile: dockerfile
+            dockerfile: ./dockerfile
 #            args:
 #                - CHOSE_PROXY=artifactory
         tty: true
         working_dir: /home/node/app
         ports:
-            - 8090:8090
+#            - 8090:8090
             - 19000-19006:19000-19006
         volumes:
             - ./global:/home/node/.npm-global

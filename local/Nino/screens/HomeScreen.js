@@ -1,10 +1,10 @@
 import {StackActions} from 'react-navigation';
 import {useIsFocused} from 'react-navigation-hooks';
-import React, {useEffect, useState} from "react";
-import {View, TouchableHighlight, Image, Text, TouchableWithoutFeedback} from "react-native";
-import {animated, useSpring} from "react-spring";
+import React, {useEffect, useState, useMemo} from "react";
+import {View, Text, TouchableWithoutFeedback} from "react-native";
+import {useSpring} from "react-spring";
 import {CSS_HOME_SCREEN as CSS} from "../constants/Styles";
-import {BODY_DIAMETER, ViewAnimated} from "../constants/Layout";
+import {HOME_BUTTON_SIZE, UNIT, ViewAnimated} from "../constants/Layout";
 import {Ionicons} from "@expo/vector-icons";
 
 export default function HomeScreen(props) {
@@ -12,12 +12,12 @@ export default function HomeScreen(props) {
     const [rotate, setRotate] = useSpring(() => ({from: {rotate: "0deg"}}));
     const [settingsInterval, setSettingsInterval] = useState(null);
     const [audioTimeout, setAudioTimeout] = useState(null);
-    const [assets] = useState(props.screenProps.assets);
+    const assets = useMemo(() => props.screenProps.assets, [props.screenProps.assets]);
     const isFocused = useIsFocused();
 
     const rotateSettings = () => {
 
-        setRotate({to: [{rotate: "360deg"}, {rotate: "0deg"}], config: {mass: 1, tension: 50, friction: 12}});
+        setRotate({to: [{rotate: "360deg"}, {rotate: "-120deg"}, {rotate: "0deg"}], config: {mass: 1, tension: 50, friction: 12}});
     };
 
     useEffect(() => {
@@ -26,67 +26,84 @@ export default function HomeScreen(props) {
 
             rotateSettings();
             setSettingsInterval(setInterval(rotateSettings, 2500));
-            setAudioTimeout(setTimeout(() => assets.chopinGrandeValseBrillanteInE.replayAsync(), 1000));
+            assets.backgroundAudio[assets.backgroundAudioLoop].getStatusAsync().then(({ isPlaying }) => {
+                if (!isPlaying) {
+
+                    const _audioLoop = (assets.backgroundAudioLoop + 1) % 2;
+                    assets.setBackgroundAudioLoop(_audioLoop);
+                    setAudioTimeout(setTimeout(() => assets.backgroundAudio[_audioLoop].replayAsync(), 1000));
+                }
+            });
         } else {
 
-            assets.chopinGrandeValseBrillanteInE.stopAsync();
+            // assets.chopinGrandeValseBrillanteInE.stopAsync();
             clearInterval(settingsInterval);
             clearInterval(audioTimeout);
         }
     }, [isFocused]);
 
-    useEffect(() => () => {
+    useEffect(() => {
 
-        assets.chopinGrandeValseBrillanteInE.stopAsync();
-        clearInterval(settingsInterval);
-        clearInterval(audioTimeout);
+        // setAudioTimeout(setTimeout(() => assets.chopinGrandeValseBrillanteInE.replayAsync(), 1000));
+
+        return () => {
+
+            assets.backgroundAudio[assets.backgroundAudioLoop].stopAsync();
+            clearInterval(settingsInterval);
+            clearInterval(audioTimeout);
+        }
     }, []);
 
     return <View style={CSS.container}>
 
         <TouchableWithoutFeedback accessibilityIgnoresInvertColors={true} onPress={() => {
 
+            assets.menuItem.replayAsync();
             props.navigation.dispatch(StackActions.push({routeName: 'Composer'}));
         }}>
             <View>
-                <Ionicons name={'md-musical-note'} size={BODY_DIAMETER * 2.5} color="#00ff19"/>
-                <Text style={{color: '#00ff19', fontSize: BODY_DIAMETER / 3, textAlign: 'center'}}>Composer</Text>
+                <Ionicons name={'md-musical-note'} size={HOME_BUTTON_SIZE.image} color="#00ff19"/>
+                <Text style={{...CSS.buttonText, color: '#00ff19'}}>Composer</Text>
             </View>
         </TouchableWithoutFeedback>
-        <View style={{width: BODY_DIAMETER}}/>
+        <View style={{width: UNIT}}/>
         <TouchableWithoutFeedback accessibilityIgnoresInvertColors={true} onPress={() => {
 
+            assets.menuItem.replayAsync();
             props.navigation.dispatch(StackActions.push({routeName: 'PerformerSelector'}));
         }}>
             <View>
-                <Ionicons name={'md-musical-notes'} size={BODY_DIAMETER * 2.5} color="#00c4ff"/>
-                <Text style={{color: '#00c4ff', fontSize: BODY_DIAMETER / 3, textAlign: 'center'}}>Performer</Text>
+                <Ionicons name={'md-musical-notes'} size={HOME_BUTTON_SIZE.image} color="#00c4ff"/>
+                <Text style={{...CSS.buttonText, color: '#00c4ff'}}>Performer</Text>
             </View>
         </TouchableWithoutFeedback>
-        <View style={{width: BODY_DIAMETER}}/>
+        <View style={{width: UNIT}}/>
         <TouchableWithoutFeedback accessibilityIgnoresInvertColors={true} onPress={() => {
 
+            assets.menuItem.replayAsync();
             props.navigation.dispatch(StackActions.push({routeName: 'Settings'}));
         }}>
             <View>
                 <ViewAnimated style={{
+                    ...CSS.buttonIconAnimatedContainer,
                     transform: [((_rotate) => { /*console.log('-----------',_rotate);*/
                         return _rotate;
                     })(rotate)]
                 }}>
-                    <Ionicons name={'md-settings'} size={BODY_DIAMETER * 2.5} color="#ffb700"/>
+                    <Ionicons name={'md-settings'} size={HOME_BUTTON_SIZE.image} color="#ffb700"/>
                 </ViewAnimated>
-                <Text style={{color: '#ffb700', fontSize: BODY_DIAMETER / 3, textAlign: 'center'}}>Chose</Text>
+                <Text style={{...CSS.buttonText, color: '#ffb700'}}>Chose</Text>
             </View>
         </TouchableWithoutFeedback>
-        <View style={{width: BODY_DIAMETER}}/>
+        <View style={{width: UNIT}}/>
         <TouchableWithoutFeedback accessibilityIgnoresInvertColors={true} onPress={() => {
 
+            assets.menuItem.replayAsync();
             props.navigation.dispatch(StackActions.push({routeName: 'Help'}));
         }}>
             <View>
-                <Ionicons name={'md-help'} size={BODY_DIAMETER * 2.5} color="#d900ff"/>
-                <Text style={{color: '#d900ff', fontSize: BODY_DIAMETER / 3, textAlign: 'center'}}>How to</Text>
+                <Ionicons name={'md-help'} size={HOME_BUTTON_SIZE.image} color="#d900ff"/>
+                <Text style={{...CSS.buttonText, color: '#d900ff'}}>How to</Text>
             </View>
         </TouchableWithoutFeedback>
     </View>;

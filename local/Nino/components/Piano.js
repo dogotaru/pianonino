@@ -1,14 +1,14 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useMemo, useState} from "react";
 import {View} from "react-native";
 import {
     WIDTH
 } from "../constants/Layout";
-import {useSpring} from "react-spring";
 import FlexKeyButton from "./FlexKeyButton";
+import {CSS_PIANO} from "../constants/Styles";
 
 export default function Piano(props) {
 
-    const [assets] = useState(props.assets);
+    const assets = useMemo(() => props.assets, [props.assets]);
     const [audioRunners, setAudioRunners] = useState([
         assets.mixNotes01,
         assets.mixNotes02,
@@ -31,6 +31,16 @@ export default function Piano(props) {
         setAudioRunners(_audioRunners);
         return audio;
     };
+
+    useEffect(() => {
+
+        assets.backgroundAudio[assets.backgroundAudioLoop].getStatusAsync().then(({ isPlaying }) => {
+            if (isPlaying) {
+
+                assets.backgroundAudio[assets.backgroundAudioLoop].stopAsync();
+            }
+        });
+    })
 
     return (
         <View style={props.style}>
@@ -66,28 +76,7 @@ export default function Piano(props) {
 
                 return <FlexKeyButton
                     key={key}
-                    style={ton ? {
-                        flex: 1,
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        borderWidth: 1,
-                        borderColor: "#000000",
-                        // width: WIDTH / 14,
-                        height: "100%",
-                        opacity: 1,
-                        backgroundColor: "#ffffff"
-                    } : {
-                        flex: 1 / 2,
-                        marginLeft: -WIDTH / 56,
-                        marginRight: -WIDTH / 56,
-                        zIndex: 99,
-                        height: "60%",
-                        // width: WIDTH / 14 / 2,
-                        borderWidth: 1,
-                        borderColor: "#ffffff",
-                        opacity: 1,
-                        backgroundColor: "#000000"
-                    }}
+                    style={ton ? CSS_PIANO.keyFull : CSS_PIANO.keyHalf}
                     // title={title}
                     position={position}
                     ionicon={ionicon}

@@ -1,11 +1,9 @@
 import React, {useEffect, useState} from "react";
 import {View, Text} from "react-native";
-import {CSS_PIANO_SCREEN, CSS_HOME_SCREEN as CSS} from "../constants/Styles";
+import {CSS_COMPOSER_SCREEN as CSS, CSS_SIDE_BUTTON_CONTAINER} from "../constants/Styles";
 import {
-    BODY_DIAMETER,
-    BORDER_WIDTH,
-    HEIGHT,
-    TextAnimated,
+    COMPOSER_SCREEN_NOTE_SLICE_UNIT,
+    UNIT,
     ViewAnimated,
     WIDTH
 } from "../constants/Layout";
@@ -32,31 +30,32 @@ export default function ComposerScreen(props) {
 
     return (
         <View style={CSS.container}>
-
-            <Button
-                color={"#ffb700"}
-                ionicon={"md-home"} position={{left: BORDER_WIDTH, top: BORDER_WIDTH * 5}}
-                pushAction={() => props.navigation.popToTop()}/>
-            <Button
-                color={"#00c4ff"}
-                ionicon={"md-musical-notes"} position={{left: BORDER_WIDTH, top: BORDER_WIDTH * 3 + BODY_DIAMETER}}
-                pushAction={() => props.navigation.dispatch(StackActions.push({ routeName: 'PerformerSelector' }))}/>
-            <Button
-                color={"#ff6114"}
-                ionicon={"md-trash"} position={{left: BORDER_WIDTH, top: BORDER_WIDTH + BODY_DIAMETER * 2}}
-                pushAction={() => setCurrentNote([])}/>
+            <View style={CSS_SIDE_BUTTON_CONTAINER.sidebar}>
+                <Button
+                    color={"#ffb700"}
+                    ionicon={"md-home"}
+                    pushAction={() => {
+                        props.screenProps.assets.menuItem.replayAsync();
+                        props.navigation.popToTop();
+                    }}/>
+                <Button
+                    color={"#00c4ff"}
+                    ionicon={"md-musical-notes"}
+                    pushAction={() => {
+                        props.screenProps.assets.menuItem.replayAsync();
+                        props.navigation.dispatch(StackActions.push({routeName: 'PerformerSelector'}));
+                    }}/>
+                <Button
+                    color={"#ff6114"}
+                    ionicon={"md-trash"}
+                    pushAction={() => {
+                        props.screenProps.assets.menuItem.replayAsync();
+                        setCurrentNote([]);
+                    }}/>
+            </View>
 
             {<ViewAnimated key='text' style={{
-                position: 'absolute',
-                top: 0,
-                width: WIDTH,
-                // alignItems: 'flex-start',
-                justifyContent: 'center',
-                zIndex: -1,
-                height: "20%",
-                // borderWidth:1,
-                // borderColor:"#00ff00",
-                flexDirection: 'row',
+                ...CSS.animatedNoteContainer,
                 opacity: textColorWobble.opacity,
                 transform: textColorWobble.scale.interpolate({
                     range: [0, 0.25, 0.35, 0.45, 0.55, 0.65, 0.75, 1],
@@ -65,42 +64,20 @@ export default function ComposerScreen(props) {
             }}
             >{currentNote.length ? <>
                 <Text style={{
-                    fontFamily: 'keyicons',
-                    textAlign: 'center',
-                    fontSize: BODY_DIAMETER * 1.5,
-                    // paddingTop: BODY_DIAMETER / 3,
-                    color: currentNote[0].color,
-                    // borderWidth: 1,
-                    // borderColor: '#ff0000'
+                    ...CSS.animatedNoteFull,
+                    color: currentNote[0].color
                 }}>{currentNote[0].ionicon[0]}</Text>
                 <Text style={{
-                    fontFamily: 'keyicons',
-                    textAlign: 'center',
-                    fontSize: BODY_DIAMETER * 0.8,
-                    // paddingTop: BODY_DIAMETER / 3,
-                    color: currentNote[0].color,
+                    ...CSS.animatedNoteHalf,
+                    color: currentNote[0].color
                 }}>{currentNote[0].ionicon[1] ? currentNote[0].ionicon[1] : ""}</Text>
             </> : null}</ViewAnimated>}
 
-            <View style={{
-                // paddingTop: BODY_DIAMETER * 0.35,
-                zIndex: -1,
-                position: 'absolute',
-                top: '20%',
-                height: "15%",
-                flexDirection: "row"
-            }}>
+            <View style={CSS.noteLogContainer}>
                 {currentNote.map((item, index) =>
                     <ViewAnimated key={`text_accumulator_${index}`} style={{
-                        width: BODY_DIAMETER * 1.5,
-                        // alignItems: 'baseline',
-                        justifyContent: 'center',
-                        marginTop: BODY_DIAMETER * 0.35,
-                        paddingLeft: BODY_DIAMETER * 0.14,
-                        paddingRight: BODY_DIAMETER * 0.14,
-                        flexDirection: 'row',
-                        opacity: 0.5,
-                        ...(index > 0 ? {borderLeftWidth: 1, borderLeftColor: "#666666"} : {})
+                        ...CSS.noteLogTextAccumulator,
+                        ...(index > 0 ? CSS.noteLogTextAccumulatorNoFirst : {})
                         // alignSelf: "baseline"
                         // opacity: textColorWobble.opacity,
                         // transform: textColorWobble.scale.interpolate({
@@ -110,41 +87,21 @@ export default function ComposerScreen(props) {
                     }}
                     >
                         <Text style={{
-                            fontFamily: 'keyicons',
-                            textAlign: 'center',
-                            fontSize: BODY_DIAMETER * 0.8,
+                            ...CSS.noteLogNoteFull,
                             color: item.color
                         }}>{item.ionicon[0]}</Text>
                         <Text style={{
-                            fontFamily: 'keyicons',
-                            textAlign: 'center',
-                            fontSize: BODY_DIAMETER * 0.5,
+                            ...CSS.noteLogNoteHalf,
                             color: item.color,
                         }}>{item.ionicon[1] ? item.ionicon[1] : ""}</Text>
                     </ViewAnimated>)}
             </View>
 
             <Piano
-                style={{
-                    // flex: 1,
-                    position: 'absolute',
-                    bottom: 0,
-                    left: 0,
-                    right: 0,
-                    alignItems: 'baseline',
-                    justifyContent: 'center',
-                    // paddingHorizontal: 10,
-                    backgroundColor: "#000000",
-                    // width: WIDTH * 1.5,
-                    height: '63%',
-                    // borderWidth: 5,
-                    // borderColor: "#ffffff",
-                    // display: "flex",
-                    flexDirection: 'row'
-                }}
+                style={CSS.piano}
                 assets={props.screenProps.assets}
                 callback={async (key) => {
-                    setCurrentNote([key, ...currentNote.slice(0, WIDTH / (BODY_DIAMETER * 1.69))])
+                    setCurrentNote([key, ...currentNote.slice(0, COMPOSER_SCREEN_NOTE_SLICE_UNIT)])
                 }}
             />
         </View>

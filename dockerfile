@@ -28,22 +28,29 @@ RUN \
 
 USER node
 
-#RUN if [ $CHOSE_PROXY = "artifactory" ]; then \
-#    # configure artifactory registry
-#    npm config set ca null; \
-#    npm config set strict-ssl false; \
-#    # npm config set registry https://artifactory.ubisoft.org/api/npm/npm/; \
-#    npm config set registry https://artifactory/artifactory/api/npm/npm/; \
-#    npm config set http_proxy http://proxy.ubisoft.org:3128/; \
-#    npm config set https-proxy http://proxy.ubisoft.org:3128/; \
-#    npm config set proxy http://proxy.ubisoft.org:3128/; \
-#    npm config set python "python2.7"; \
-#else \
-#    # configure verdaccio registry
-#    npm config set ca null; \
-#    npm config set strict-ssl false; \
-#    npm config set registry http://verdaccio:4873; \
-#    npm config set python "python2.7"; \
-#fi ;
+RUN ["/bin/bash", "-c", "if [ \"$CHOSE_PROXY\" = \"artifactory\" ]; then \
+                             # configure artifactory registry
+                             npm config set ca null; \
+                             npm config set strict-ssl false; \
+                             # npm config set registry https://artifactory.ubisoft.org/api/npm/npm/; \
+                             npm config set registry https://artifactory/artifactory/api/npm/npm/; \
+                             npm config set http_proxy http://proxy.ubisoft.org:3128/; \
+                             npm config set https-proxy http://proxy.ubisoft.org:3128/; \
+                             npm config set proxy http://proxy.ubisoft.org:3128/; \
+                             npm config set python \"python2.7\"; \
+                         else \
+                             # configure verdaccio registry
+                             # npm config set ca null; \
+                             # npm config set strict-ssl false; \
+                             npm config rm http_proxy ; \
+                             npm config rm https-proxy ; \
+                             npm config rm proxy ; \
+                             npm config set registry https://registry.npmjs.org; \
+                             npm config set python \"python2.7\"; \
+                         fi ; \
+                         \
+                         if [ \"$CHOSE_PROXY\" = \"verdaccio\" ]; then \
+                             npm config set registry http://verdaccio:4873; \
+                         fi ;"]
 
 ENV PATH=${PATH}:/home/node/.npm-global/bin:/home/node/app/node_modules/.bin/

@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from "react";
 import {View, Text, TouchableHighlight, FlatList} from "react-native";
-import {CSS_PIANO_SCREEN, CSS_HOME_SCREEN as CSS} from "../constants/Styles";
+import {CSS_PERFORMER_SELECTOR_SCREEN as CSS, CSS_SIDE_BUTTON_CONTAINER} from "../constants/Styles";
 import {
-    BODY_DIAMETER,
+    UNIT,
     BORDER_WIDTH,
     HEIGHT,
     TextAnimated,
@@ -32,26 +32,27 @@ export default function PerformerSelectorScreen(props) {
 
     return (
         <View style={CSS.container}>
+            <View style={CSS_SIDE_BUTTON_CONTAINER.sidebar}>
+                <Button
+                    color={"#ffb700"}
+                    ionicon={"md-home"}
+                    pushAction={() => {
+                        props.screenProps.assets.menuItem.replayAsync();
+                        props.navigation.popToTop();
+                    }}/>
+                <Button
+                    color={"#00ff19"}
+                    ionicon={"md-musical-note"}
+                    pushAction={() => {
+                        props.screenProps.assets.menuItem.replayAsync();
+                        props.navigation.dispatch(StackActions.push({routeName: 'Composer'}));
+                    }}/>
+            </View>
 
-            <Button
-                color={"#ffb700"}
-                ionicon={"md-home"} position={{left: BORDER_WIDTH, top: BORDER_WIDTH * 5}}
-                pushAction={() => props.navigation.popToTop()}/>
-            <Button
-                color={"#00ff19"}
-                ionicon={"md-musical-note"} position={{left: BORDER_WIDTH, top: BORDER_WIDTH * 3 + BODY_DIAMETER}}
-                pushAction={() => props.navigation.dispatch(StackActions.push({routeName: 'Composer'}))}/>
-
-            <View style={{
-                // paddingTop: BODY_DIAMETER * 0.35,
-                flex: 1,
-                zIndex: -1,
-                // height: HEIGHT,
-                flexDirection: "column",
-                marginRight: "10%",
-                borderRightWidth: BODY_DIAMETER / 2,
-                borderColor: "#613a6a"
-            }}>
+            <View style={CSS.listContainer}>
+                <View style={CSS.listDepthSimulatorUp}/>
+                <View style={CSS.listDepthSimulatorDown}/>
+                <View style={CSS.listPseudoScroll}/>
                 <FlatList
                     data={[
                         {
@@ -134,8 +135,70 @@ export default function PerformerSelectorScreen(props) {
                                 ]
                             }
                         },
-                        {name: 'Selector2', gimmick: 'T', params: {id: 'id03', partiture: []}},
-                        {name: 'Selector2', gimmick: 'T', params: {id: 'id04', partiture: []}},
+                        {
+                            name: 'Old McDonald had a farm', gimmick: 'T', params: {
+                                id: 'id04', partiture: [
+                                    {color: '#d900ff', ionicon: 'c'},
+                                    {color: '#d900ff', ionicon: 'c'},
+                                    {color: '#d900ff', ionicon: 'c'},
+                                    {color: '#ffb700', ionicon: 'g'},
+                                    {color: '#ffb700', ionicon: 'a'},
+                                    {color: '#ffb700', ionicon: 'a'},
+                                    {color: '#ffb700', ionicon: 'g'},
+                                    {color: '#d900ff', ionicon: 'e'},
+                                    {color: '#d900ff', ionicon: 'e'},
+                                    {color: '#d900ff', ionicon: 'd'},
+                                    {color: '#d900ff', ionicon: 'd'},
+                                    {color: '#d900ff', ionicon: 'c'},
+                                    {color: '#ffb700', ionicon: 'g'},
+                                    {color: '#d900ff', ionicon: 'c'},
+                                    {color: '#d900ff', ionicon: 'c'},
+                                    {color: '#d900ff', ionicon: 'c'},
+                                    {color: '#ffb700', ionicon: 'g'},
+                                    {color: '#ffb700', ionicon: 'a'},
+                                    {color: '#ffb700', ionicon: 'a'},
+                                    {color: '#ffb700', ionicon: 'g'},
+                                    {color: '#d900ff', ionicon: 'e'},
+                                    {color: '#d900ff', ionicon: 'e'},
+                                    {color: '#d900ff', ionicon: 'd'},
+                                    {color: '#d900ff', ionicon: 'd'},
+                                    {color: '#d900ff', ionicon: 'c'},
+                                    {color: '#ffb700', ionicon: 'g'},
+                                    {color: '#ffb700', ionicon: 'g'},
+                                    {color: '#d900ff', ionicon: 'c'},
+                                    {color: '#d900ff', ionicon: 'c'},
+                                    {color: '#d900ff', ionicon: 'c'},
+                                    {color: '#ffb700', ionicon: 'g'},
+                                    {color: '#ffb700', ionicon: 'g'},
+                                    {color: '#d900ff', ionicon: 'c'},
+                                    {color: '#d900ff', ionicon: 'c'},
+                                    {color: '#d900ff', ionicon: 'c'},
+                                    {color: '#d900ff', ionicon: 'c'},
+                                    {color: '#d900ff', ionicon: 'c'},
+                                    {color: '#d900ff', ionicon: 'c'},
+                                    {color: '#d900ff', ionicon: 'c'},
+                                    {color: '#d900ff', ionicon: 'c'},
+                                    {color: '#d900ff', ionicon: 'c'},
+                                    {color: '#d900ff', ionicon: 'c'},
+                                    {color: '#d900ff', ionicon: 'c'},
+                                    {color: '#d900ff', ionicon: 'c'},
+                                    {color: '#d900ff', ionicon: 'c'},
+                                    {color: '#d900ff', ionicon: 'c'},
+                                    {color: '#d900ff', ionicon: 'c'},
+                                    {color: '#d900ff', ionicon: 'c'},
+                                    {color: '#d900ff', ionicon: 'c'},
+                                    {color: '#d900ff', ionicon: 'c'},
+                                    {color: '#ffb700', ionicon: 'g'},
+                                    {color: '#ffb700', ionicon: 'a'},
+                                    {color: '#ffb700', ionicon: 'a'},
+                                    {color: '#ffb700', ionicon: 'g'},
+                                    {color: '#d900ff', ionicon: 'e'},
+                                    {color: '#d900ff', ionicon: 'e'},
+                                    {color: '#d900ff', ionicon: 'd'},
+                                    {color: '#d900ff', ionicon: 'd'},
+                                    {color: '#d900ff', ionicon: 'c'}
+                                ]}
+                        },
                         {name: 'Selector2', gimmick: 'T', params: {id: 'id05', partiture: []}},
                         {name: 'Selector2', gimmick: 'T', params: {id: 'id06', partiture: []}},
                         {name: 'Selector2', gimmick: 'T', params: {id: 'id07', partiture: []}},
@@ -156,7 +219,10 @@ export default function PerformerSelectorScreen(props) {
                         {name: 'Selector2', gimmick: 'T', params: {id: 'id22', partiture: []}},
                         {name: 'Selector2', gimmick: 'T', params: {id: 'id23', partiture: []}},
                         {name: 'Selector2', gimmick: 'T', params: {id: 'id24', partiture: []}},
-                        {name: 'Selector2', gimmick: 'T', params: {id: 'id25', partiture: []}}
+                        {name: 'Selector2', gimmick: 'T', params: {id: 'id25', partiture: []}},
+                        {name: 'Test', gimmick: 'T', params: {id: 'id03', partiture: [
+                                    {color: '#d900ff', ionicon: 'c'}
+                                ]}},
                     ]}
                     renderItem={({item}) => <TouchableHighlight underlayColor={"#ffffff"} onPress={() => {
 
@@ -166,17 +232,12 @@ export default function PerformerSelectorScreen(props) {
                         });
                         props.navigation.dispatch(pushAction);
                     }} title="Play">
-                        <Text style={{color: '#dd90ec', textAlign: 'left', paddingLeft: '12%', fontSize: BODY_DIAMETER * 0.8, fontFamily: 'opensans'}}>
-                            <Text style={{fontFamily: 'musicele', fontSize: BODY_DIAMETER * 0.7, color: "#ffb700"}}>{item.gimmick}</Text> <Text style={{color: "#00ff19"}}>|</Text>  {item.name}
+                        <Text style={CSS.listItemContainer}>
+                            <Text style={CSS.listItemGimmick}>{item.gimmick}</Text> <Text style={CSS.listItemHorizontalSeparator}>|</Text>  {item.name}
                         </Text>
                     </TouchableHighlight>}
                     keyExtractor={item => item.params.id}
-                    ItemSeparatorComponent={() => <View style={{
-                        // backgroundColor: '#ffff00',
-                        height: BODY_DIAMETER / 7,
-                        width: WIDTH / 2,
-                        margin: BODY_DIAMETER / 5
-                    }}/>}
+                    ItemSeparatorComponent={() => <View style={CSS.listItemVerticalalSeparator}/>}
                 />
             </View>
         </View>

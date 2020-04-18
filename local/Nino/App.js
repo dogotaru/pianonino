@@ -1,12 +1,13 @@
 import React, {useState, useEffect} from 'react';
-import {Platform, StatusBar, StyleSheet, View, Text, SafeAreaView} from 'react-native';
-// import {AppLoading} from "expo";
+import {Platform, StatusBar, StyleSheet, View, Text, SafeAreaView, Image} from 'react-native';
 import {Asset} from 'expo-asset';
 import AppContainer from './navigation/AppNavigator';
 import {Audio} from "expo-av";
 import * as Font from 'expo-font';
 import * as SecureStore from 'expo-secure-store';
-import {HEIGHT} from "./constants/Layout";
+import {CSS_APP} from "./constants/Styles";
+
+export const delay = ms => new Promise(res => setTimeout(res, ms));
 
 export default function App(props) {
     const [isLoadingComplete, setLoadingComplete] = useState(false);
@@ -15,8 +16,11 @@ export default function App(props) {
         mixNotes02: new Audio.Sound(),
         mixNotes03: new Audio.Sound(),
         clap: new Audio.Sound(),
+        goodJob: new Audio.Sound(),
         clink: new Audio.Sound(),
         chopinGrandeValseBrillanteInE: new Audio.Sound(),
+        straussVoicesOfSpringWaltzPiano: new Audio.Sound(),
+        menuItem: new Audio.Sound(),
         noteIconMapping: {
             c: 'C',
             d: 'D',
@@ -25,8 +29,16 @@ export default function App(props) {
             g: 'G',
             a: 'A',
             b: 'B'
-        }
+        },
+        mappingPersists: false
     });
+    const [backgroundAudio] = useState([
+        assets.straussVoicesOfSpringWaltzPiano,
+        assets.chopinGrandeValseBrillanteInE
+    ]);
+    const [backgroundAudioLoop, setBackgroundAudioLoop] = useState(
+        Math.floor(Math.random() * backgroundAudio.length)
+    );
 
     const setNoteIconMapping = async (_noteIconMapping) => {
 
@@ -39,7 +51,8 @@ export default function App(props) {
 
     useEffect(() => {
         if (isLoadingComplete) {
-            // assets.mixNotes01.setVolumeAsync(1);
+            assets.menuItem.setVolumeAsync(0.4);
+            assets.goodJob.setVolumeAsync(0.8);
             // assets.mixNotes02.setVolumeAsync(1);
             // assets.mixNotes03.setVolumeAsync(1);
         }
@@ -53,8 +66,9 @@ export default function App(props) {
 
     useEffect(() => {
 
-        !assets.clap._loaded && loadResourcesAsync().then(() => {
+        !assets.menuItem._loaded && loadResourcesAsync().then(async () => {
 
+            await delay(1000);
             setLoadingComplete(true);
         });
     }, []);
@@ -65,8 +79,11 @@ export default function App(props) {
             assets.mixNotes02.loadAsync(require("./assets/audio/notes/mix-notes-intervals-compressed-amplified.mp3")),
             assets.mixNotes03.loadAsync(require("./assets/audio/notes/mix-notes-intervals-compressed-amplified.mp3")),
             assets.clap.loadAsync(require("./assets/audio/small-group-clapping-hands.mp3")),
+            assets.goodJob.loadAsync(require("./assets/audio/good-job.mp3")),
             assets.clink.loadAsync(require("./assets/audio/collect-coin.mp3")),
             assets.chopinGrandeValseBrillanteInE.loadAsync(require("./assets/audio/chopin-grande-valse-brillante-in-e.mp3")),
+            assets.straussVoicesOfSpringWaltzPiano.loadAsync(require("./assets/audio/strauss-voices-of-spring-waltz-piano..mp3")),
+            assets.menuItem.loadAsync(require("./assets/audio/menu-item.mp3")),
 
             Asset.loadAsync([
                 require('./assets/images/flags/it.png'),
@@ -78,7 +95,7 @@ export default function App(props) {
             SecureStore.getItemAsync('_noteIconMapping').then((_noteIconMapping) => {
 
                 if (_noteIconMapping)
-                    setAssets({...assets, noteIconMapping: JSON.parse(_noteIconMapping)});
+                    setAssets({...assets, noteIconMapping: JSON.parse(_noteIconMapping), mappingPersists: true});
             }),
 
             Font.loadAsync({
@@ -100,23 +117,25 @@ export default function App(props) {
 
     if (!isLoadingComplete && !props.skipLoadingScreen) {
         return (
-            <View styles={{ flex: 1, alignItems: 'center' }}>
-                <Text>Loading...</Text>
+            <View style={CSS_APP.loaderContainer}>
+                <Text style={CSS_APP.loaderContent}>Loading...</Text>
             </View>
         );
     } else {
+        // assets.menuItem.replayAsync();
         return (
-            <View style={styles.container}>
+            <View style={CSS_APP.container}>
                 {Platform.OS === 'ios' && <StatusBar barStyle="default"/>}
-                <AppContainer screenProps={{assets: {...assets, setNoteIconMapping: setNoteIconMapping}}}/>
+                <AppContainer screenProps={{
+                    assets: {
+                        ...assets,
+                        setNoteIconMapping: setNoteIconMapping,
+                        backgroundAudio,
+                        backgroundAudioLoop,
+                        setBackgroundAudioLoop
+                    }
+                }}/>
             </View>
         );
     }
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#ff0'
-    },
-});

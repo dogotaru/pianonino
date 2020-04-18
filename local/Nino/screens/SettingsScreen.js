@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from "react";
 import {View, Text, TouchableHighlight, FlatList, TouchableWithoutFeedback} from "react-native";
-import {CSS_PIANO_SCREEN, CSS_HOME_SCREEN as CSS} from "../constants/Styles";
+import {CSS_PIANO_SCREEN, CSS_HOME_SCREEN as CSS, CSS_SIDE_BUTTON_CONTAINER} from "../constants/Styles";
 import {
-    BODY_DIAMETER,
+    UNIT,
     BORDER_WIDTH,
     HEIGHT,
     TextAnimated,
@@ -40,92 +40,115 @@ export default function SettingsScreen(props) {
     //     });
     // }, [currentNote]);
 
+    useEffect(() => {
+        // props.screenProps.assets.menuItem.replayAsync();
+        if (props.screenProps.assets.mappingPersists) {
+
+            setNoteIconMapping(noteIconMapping.map((item, index) =>
+                ({...item, mapped: true, icon: props.screenProps.assets.noteIconMapping[item.notation]})
+            ));
+        }
+    }, []);
+
     return (
         <View style={CSS.container}>
+            <View style={CSS_SIDE_BUTTON_CONTAINER.sidebar}>
+                <Button
+                    color={"#ffb700"}
+                    ionicon={"md-home"}
+                    pushAction={() => {
+                        props.screenProps.assets.menuItem.replayAsync();
+                        props.navigation.popToTop();
+                    }}/>
+                <Button
+                    color={"#00c4ff"}
+                    ionicon={"md-trash"}
+                    pushAction={() => {
+                        props.screenProps.assets.menuItem.replayAsync();
+                        setNoteIconMapping(noteIconMapping.map((item) => ({
+                            ...item,
+                            icon: 'md-qr-scanner',
+                            selected: false,
+                            mapped: false
+                        })));
+                    }}/>
+                <Button
+                    color={"#ffb700"}
+                    ionicon={require('../assets/images/flags/it.png')}
+                    pushAction={() => {
+                        const country = {c: 'U', d: 'h', e: 'S', f: 'e', g: '0', a: 'i', b: 'o'};
+                        setNoteIconMapping(noteIconMapping.map((item, index) =>
+                            ({...item, mapped: true, icon: country[item.notation]})
+                        ));
+                        props.screenProps.assets.clink.replayAsync();
+                    }}/>
+                <Button
+                    color={"#ffb700"}
+                    ionicon={require('../assets/images/flags/ro.png')}
+                    pushAction={() => {
+                        const country = {c: 'U', d: 'h', e: 'S', f: 'e', g: '0', a: 'i', b: 'o'};
+                        setNoteIconMapping(noteIconMapping.map((item, index) =>
+                            ({...item, mapped: true, icon: country[item.notation]})
+                        ));
+                        props.screenProps.assets.clink.replayAsync();
+                    }}/>
+                <Button
+                    color={"#ffb700"}
+                    ionicon={require('../assets/images/flags/us.png')}
+                    pushAction={() => {
+                        const country = {c: 'W', d: 'u', e: 'q', f: 'a', g: '9', a: 'l', b: 'y'};
+                        setNoteIconMapping(noteIconMapping.map((item, index) =>
+                            ({...item, mapped: true, icon: country[item.notation]})
+                        ));
+                        props.screenProps.assets.clink.replayAsync();
+                    }}/>
+                <Button
+                    color={"#ffb700"}
+                    ionicon={require('../assets/images/flags/ru.png')}
+                    pushAction={() => {
+                        const country = {c: 'g', d: 's', e: 'O', f: 'N', g: 'w', a: 'd', b: 'r'};
+                        setNoteIconMapping(noteIconMapping.map((item, index) =>
+                            ({...item, mapped: true, icon: country[item.notation]})
+                        ));
+                        props.screenProps.assets.clink.replayAsync();
+                    }}/>
+                {noteIconMapping.filter(({mapped}) => mapped).length === 7 && <Button
+                    color={"#00ff19"}
+                    ionicon={"md-save"}
+                    pushAction={() => {
+                        const _noteIconMapping = {};
+                        noteIconMapping.forEach(item => {
+                            _noteIconMapping[item.notation] = item.icon;
+                        });
+                        props.screenProps.assets.setNoteIconMapping(_noteIconMapping).then(() => {
 
-            <Button
-                color={"#ffb700"}
-                ionicon={"md-home"} position={{left: BORDER_WIDTH, top: BORDER_WIDTH * 5}}
-                pushAction={() => props.navigation.popToTop()}/>
-            <Button
-                color={"#00c4ff"}
-                ionicon={"md-trash"} position={{left: BORDER_WIDTH, top: BORDER_WIDTH * 3 + BODY_DIAMETER}}
-                pushAction={() => setNoteIconMapping(noteIconMapping.map((item) => ({
-                    ...item,
-                    icon: 'md-qr-scanner',
-                    selected: false,
-                    mapped: false
-                })))}/>
-            <Button
-                color={"#ffb700"}
-                ionicon={require('../assets/images/flags/it.png')} position={{left: BORDER_WIDTH, top: BORDER_WIDTH + BODY_DIAMETER * 2}}
-                pushAction={() => {
-                    const country = {c: 'U', d: 'h', e: 'S', f: 'e', g: '0', a: 'i', b: 'o'};
-                    setNoteIconMapping(noteIconMapping.map((item, index) =>
-                        ({...item, mapped: true, icon: country[item.notation]})
-                    ));
-                    props.screenProps.assets.clink.replayAsync();
-                }}/>
-            <Button
-                color={"#ffb700"}
-                ionicon={require('../assets/images/flags/ro.png')} position={{left: BORDER_WIDTH, top: -BORDER_WIDTH + BODY_DIAMETER * 3}}
-                pushAction={() => {
-                    const country = {c: 'U', d: 'h', e: 'S', f: 'e', g: '0', a: 'i', b: 'o'};
-                    setNoteIconMapping(noteIconMapping.map((item, index) =>
-                        ({...item, mapped: true, icon: country[item.notation]})
-                    ));
-                    props.screenProps.assets.clink.replayAsync();
-                }}/>
-            <Button
-                color={"#ffb700"}
-                ionicon={require('../assets/images/flags/us.png')} position={{left: BORDER_WIDTH, top: -BORDER_WIDTH * 3 + BODY_DIAMETER * 4}}
-                pushAction={() => {
-                    const country = {c: 'W', d: 'u', e: 'q', f: 'a', g: '9', a: 'l', b: 'y'};
-                    setNoteIconMapping(noteIconMapping.map((item, index) =>
-                        ({...item, mapped: true, icon: country[item.notation]})
-                    ));
-                    props.screenProps.assets.clink.replayAsync();
-                }}/>
-            <Button
-                color={"#ffb700"}
-                ionicon={require('../assets/images/flags/ru.png')} position={{left: BORDER_WIDTH, top: -BORDER_WIDTH * 5 + BODY_DIAMETER * 5}}
-                pushAction={() => {
-                    const country = {c: 'g', d: 's', e: 'O', f: 'N', g: 'w', a: 'd', b: 'r'};
-                    setNoteIconMapping(noteIconMapping.map((item, index) =>
-                        ({...item, mapped: true, icon: country[item.notation]})
-                    ));
-                    props.screenProps.assets.clink.replayAsync();
-                }}/>
-            {noteIconMapping.filter(({mapped}) => mapped).length === 7 && <Button
-                color={"#00ff19"}
-                ionicon={"md-save"} position={{left: BORDER_WIDTH, top: -BORDER_WIDTH * 7 + BODY_DIAMETER * 6}}
-                pushAction={() => {
-                    const _noteIconMapping = {};
-                    noteIconMapping.forEach(item => {
-                        _noteIconMapping[item.notation] = item.icon;
-                    });
-                    props.screenProps.assets.setNoteIconMapping(_noteIconMapping).then(() => {
-
-                        props.navigation.dispatch(StackActions.push({routeName: 'Composer'}));
-                    });
-                }}/>}
+                            props.screenProps.assets.menuItem.replayAsync();
+                            props.navigation.dispatch(StackActions.push({routeName: 'Composer'}));
+                        });
+                    }}/>}
+            </View>
 
             <View style={{
-                // paddingTop: BODY_DIAMETER * 0.35,
+                // paddingTop: UNIT * 0.35,
                 flex: 1,
                 zIndex: -1,
                 flexDirection: "column",
             }}>
                 <View style={{
-                    // paddingTop: BODY_DIAMETER * 0.35,
+                    // paddingTop: UNIT * 0.35,
                     flex: 1,
                     zIndex: -1,
-                    height: BODY_DIAMETER,
+                    height: UNIT,
                     flexDirection: "row",
                     flexWrap: 'wrap',
-                    paddingLeft: BODY_DIAMETER * 1.5,
-                    paddingRight: BODY_DIAMETER * 1.5,
-                    alignContent: 'flex-start'
+                    marginLeft: UNIT,
+                    // marginRight: UNIT,
+                    // marginBottom: UNIT * 0.2,
+                    paddingTop: UNIT * 0.2,
+                    paddingBottom: UNIT * 0.2,
+                    alignContent: 'flex-start',
+                    backgroundColor: '#042f07',
+                    // shadowColor: "#fff", shadowOffset: { width: 0, height: 2, }, shadowOpacity: 1, shadowRadius: 20, elevation: 5
                 }}>
                     {noteIconMapping.map(({icon, name, selected, mapped}, index) =>
                         <TouchableWithoutFeedback key={index} accessibilityIgnoresInvertColors={true} onPress={() => {
@@ -139,17 +162,20 @@ export default function SettingsScreen(props) {
                                 {mapped
                                     ? <Text style={{
                                         fontFamily: 'keyicons',
-                                        fontSize: BODY_DIAMETER * 0.78,
-                                        color: `${selected ? "#d900ff" : mapped ? '#ffb700' : "#ffffff"}`,
+                                        fontSize: UNIT * 0.9,
+                                        color: `${selected ? "#00ff19" : mapped ? '#ffb700' : "#ffffff"}`,
                                         textAlign: 'center',
                                         alignItems: 'center',
-                                        justifyContent: 'center'
+                                        justifyContent: 'center',
+                                        textShadowOffset: {width: 1, height: 1},
+                                        textShadowRadius: UNIT * 0.2,
+                                        textShadowColor: "#000000"
                                     }}>{icon}</Text>
-                                    : <Ionicons name={icon} size={BODY_DIAMETER * 0.8}
-                                                color={selected ? "#d900ff" : "#ffffff"}/>}
+                                    : <Ionicons name={icon} size={UNIT * 0.8}
+                                                color={selected ? "#00ff19" : "#ffffff"}/>}
                                 <Text style={{
                                     textAlign: 'center',
-                                    color: `${selected ? "#d900ff" : mapped ? '#ffb700' : "#ffffff"}`
+                                    color: `${selected ? "#00ff19" : mapped ? '#ffb700' : "#ffffff"}`
                                 }}>{name}</Text>
                             </View>
                         </TouchableWithoutFeedback>
@@ -158,26 +184,52 @@ export default function SettingsScreen(props) {
 
 
                 <View style={{
-                    // paddingTop: BODY_DIAMETER * 0.35,
+                    // paddingTop: UNIT * 0.35,
                     flex: 4,
                     // height: "100%",
-                    paddingLeft: BODY_DIAMETER / 2,
-                    paddingRight: BODY_DIAMETER / 2
+                    marginLeft: UNIT / 1,
+                    // paddingRight: UNIT / 2
                 }}>
+                    <View style={{
+                        width: '100%',
+                        height: UNIT * 0.3,
+                        position: 'absolute',
+                        top: 0,
+                        right: 0,
+                        zIndex: 1,
+                        opacity: 0.5,
+                        backgroundColor: '#111111',
+                        blurRadius: 10
+                    }}/>
+                    <View style={{
+                        width: '100%',
+                        height: UNIT * 0.4,
+                        position: 'absolute',
+                        bottom: 0,
+                        right: 0,
+                        zIndex: 1,
+                        opacity: 0.5,
+                        backgroundColor: '#111111',
+                        blurRadius: 10
+                    }}/>
                     <FlatList
+                        initialScrollIndex={0}
                         data={[{id: 0, dummy: 'a'}]}
                         keyExtractor={(item, index) => `dummy-${index}`}
                         renderItem={({item}) => {
                             const isOneSelected = !!noteIconMapping.filter(({selected}) => selected).length;
                             return <View style={{
-                                // paddingTop: BODY_DIAMETER * 0.35,
+                                // paddingTop: UNIT * 0.35,
                                 flex: 1,
                                 // height: "100%",
                                 flexDirection: "row",
                                 flexWrap: 'wrap',
                                 justifyContent: 'space-between',
-                                paddingLeft: BODY_DIAMETER / 2,
-                                paddingRight: BODY_DIAMETER / 2
+                                // paddingLeft: UNIT / 2,
+                                // paddingRight: UNIT / 2,
+                                paddingTop: UNIT * 0.2,
+                                backgroundColor: '#111111'
+                                // shadowColor: "#fff", shadowOffset: { width: 0, height: 10, }, shadowOpacity: 1, shadowRadius: 40, elevation: 5
                             }}>
                                 {[
                                     {letter: '0'},
@@ -261,16 +313,16 @@ export default function SettingsScreen(props) {
                                                 }) : item));
                                         }}>
                                         <Text style={{
-                                            fontFamily: 'keyicons', fontSize: BODY_DIAMETER, color: '#ffb700',
+                                            fontFamily: 'keyicons', fontSize: UNIT * 0.8, color: '#00ff19',
                                             // flex: 1,
                                             textAlign: 'center',
                                             alignItems: 'center', justifyContent: 'center',
-                                            padding: BODY_DIAMETER / 4,
-                                            margin: BODY_DIAMETER / 10,
-                                            width: BODY_DIAMETER * 1.7,
+                                            padding: UNIT / 4,
+                                            margin: UNIT / 10,
+                                            width: UNIT * 1.7,
                                             // backgroundColor: "#ffb700",
-                                            borderBottomWidth: 1,
-                                            borderColor: '#00ff19',
+                                            // borderBottomWidth: 2,
+                                            // borderColor: '#00ff19',
                                             opacity: isOneSelected ? 1 : 0.6
                                         }}>{letter}</Text>
                                     </TouchableWithoutFeedback>

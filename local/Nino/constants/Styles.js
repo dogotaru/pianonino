@@ -1,5 +1,5 @@
 import {StyleSheet} from "react-native";
-import {HEIGHT, WIDTH, IS_SMALL_DEVICE, UNIT, HALF_UNIT, HOME_BUTTON_SIZE} from "./Layout";
+import {HEIGHT, WIDTH, IS_SMALL_DEVICE, UNIT, HALF_UNIT, HOME_BUTTON_SIZE, UNIT_BASED, HALF_WIDTH} from "./Layout";
 
 export const CSS_APP = StyleSheet.create({
     container: {
@@ -11,7 +11,8 @@ export const CSS_APP = StyleSheet.create({
         justifyContent: 'center',
         height: HEIGHT,
         width: WIDTH,
-        backgroundColor: '#000000'
+        backgroundColor: '#000000',
+        resizeMode: 'contain'
     },
     loaderContent: {
         textAlign: 'center',
@@ -153,7 +154,7 @@ const PIANO_SCREEN_NOTES_DEFAULT = {
     animatedNoteFull: {
         fontFamily: 'keyicons',
         textAlign: 'center',
-        fontSize: UNIT * 1.5,
+        fontSize: UNIT_BASED._1_5,
         // paddingTop: UNIT / 3,
         // borderWidth: 1,
         // borderColor: '#ff0000'
@@ -161,10 +162,9 @@ const PIANO_SCREEN_NOTES_DEFAULT = {
     animatedNoteHalf: {
         fontFamily: 'keyicons',
         textAlign: 'center',
-        fontSize: UNIT * 0.8
+        fontSize: UNIT_BASED._0_8
     },
     noteLogContainer: {
-        // paddingTop: UNIT * 0.35,
         zIndex: -1,
         position: 'absolute',
         top: '20%',
@@ -173,7 +173,7 @@ const PIANO_SCREEN_NOTES_DEFAULT = {
         width: WIDTH * 0.92
     },
     noteLogTextAccumulator: {
-        width: UNIT * 1.5,
+        width: UNIT_BASED._1_5,
         // alignItems: 'baseline',
         justifyContent: 'center',
         marginTop: UNIT * 0.35,
@@ -189,12 +189,12 @@ const PIANO_SCREEN_NOTES_DEFAULT = {
     noteLogNoteFull: {
         fontFamily: 'keyicons',
         textAlign: 'center',
-        fontSize: UNIT * 0.8,
+        fontSize: UNIT_BASED._0_8,
     },
     noteLogNoteHalf: {
         fontFamily: 'keyicons',
         textAlign: 'center',
-        fontSize: UNIT * 0.5,
+        fontSize: HALF_UNIT,
     },
 }
 
@@ -226,7 +226,7 @@ export const CSS_PERFORMER_SCREEN = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         position: 'relative',
-        top: -UNIT * 0.4,
+        top: -UNIT_BASED._0_65,
         // textTransform: "uppercase",
         zIndex: 99,
         // borderWidth: 1,
@@ -237,7 +237,7 @@ export const CSS_PERFORMER_SCREEN = StyleSheet.create({
         textAlign: 'center',
         fontSize: UNIT * 2, color: "#00c4ff", fontWeight: 'bold',
         textShadowOffset: {width: 0, height: 0},
-        textShadowRadius: UNIT * 1.5,
+        textShadowRadius: UNIT_BASED._1_5,
         textShadowColor: "#000000"
     },
     animatedCongratsNoteContainer: {
@@ -249,7 +249,6 @@ export const CSS_PERFORMER_SCREEN = StyleSheet.create({
 export const CSS_PERFORMER_SELECTOR_SCREEN = StyleSheet.create({
     container: SCREEN_CONTAINER_DEFAULT,
     listContainer: {
-        // paddingTop: UNIT * 0.35,
         flex: 1,
         zIndex: -1,
         // height: HEIGHT,
@@ -260,25 +259,23 @@ export const CSS_PERFORMER_SELECTOR_SCREEN = StyleSheet.create({
     },
     listDepthSimulatorUp: {
         width: '100%',
-        height: UNIT * 0.5,
+        height: HALF_UNIT,
         position: 'absolute',
         top: 0,
         right: 0,
         zIndex: 1,
         opacity: 0.5,
         backgroundColor: '#111111',
-        // blurRadius: 10
     },
     listDepthSimulatorDown: {
         width: '100%',
-        height: UNIT * 0.5,
+        height: HALF_UNIT,
         position: 'absolute',
         bottom: 0,
         right: 0,
         zIndex: 1,
         opacity: 0.5,
         backgroundColor: '#111111',
-        // blurRadius: 10
     },
     listPseudoScroll: {
         width: HALF_UNIT,
@@ -289,13 +286,12 @@ export const CSS_PERFORMER_SELECTOR_SCREEN = StyleSheet.create({
         zIndex: 0,
         opacity: 1,
         backgroundColor: '#613a6a',
-        // blurRadius: 10
     },
     listItemContainer: {
         color: '#dd90ec',
         textAlign: 'left',
         paddingLeft: '12%',
-        fontSize: UNIT * 0.8,
+        fontSize: UNIT_BASED._0_8,
         fontFamily: 'opensans'
     },
     listItemGimmick: {
@@ -309,7 +305,7 @@ export const CSS_PERFORMER_SELECTOR_SCREEN = StyleSheet.create({
     listItemVerticalalSeparator: {
         // backgroundColor: '#ffff00',
         height: UNIT / 7,
-        width: WIDTH / 2,
+        width: HALF_WIDTH,
         margin: UNIT / 5
     }
 });
@@ -343,55 +339,94 @@ export const CSS_HELP_SCREEN = StyleSheet.create({
     },
 });
 
-// export const CSS_AUDIO_SCREEN = {
-//     effect: StyleSheet.create({
-//         backgroundTransparent: {
-//             position: "absolute",
-//             zIndex: 99,
-//             opacity: 0.2,
-//             height: HEIGHT,
-//             width: WIDTH
-//         },
-//         backgroundOpaque: {
-//             position: "absolute",
-//             zIndex: 99,
-//             height: HEIGHT,
-//             width: WIDTH,
-//             display: "flex",
-//             flexDirection: 'row',
-//             flex: 1,
-//             alignContent: "center",
-//             alignItems: 'center'
-//         },
-//         text: {
-//             fontFamily: 'grafitty',
-//             width: WIDTH,
-//             justifyContent: 'center',
-//             textAlign: 'center',
-//             textTransform: "uppercase",
-//             fontSize: UNIT,
-//             color: "black",
-//             zIndex: 99,
-//             textShadowOffset: {width: 0, height: 0},
-//             textShadowRadius: 20,
-//             textShadowColor: "#ffffff"
-//         },
-//         buttonsContainerFlex: {
-//             height: HEIGHT,
-//             width: WIDTH,
-//             display: "flex",
-//             flexDirection: 'row',
-//             flex: 1,
-//             // justifyContent: "space-evenly",
-//             alignContent: "center",
-//             alignItems: 'center',
-//             flexWrap: 'wrap',
-//             padding: WIDTH / 30
-//         },
-//         button: {
-//             width: 12.5 * WIDTH / 60,
-//             height: 12.5 * WIDTH / 60,
-//             margin: WIDTH / 80
-//         }
-//     })
-// };
+export const CSS_SETTINGS_SCREEN = StyleSheet.create({
+    container: SCREEN_CONTAINER_DEFAULT,
+    content: {
+        flex: 1,
+        zIndex: -1,
+        flexDirection: "column"
+    },
+    definitionRow: {
+        flex: 1,
+        zIndex: -1,
+        height: UNIT,
+        flexDirection: "row",
+        flexWrap: 'wrap',
+        marginLeft: UNIT,
+        // marginRight: UNIT,
+        // marginBottom: UNIT_BASED._0_2,
+        paddingTop: UNIT_BASED._0_2,
+        paddingBottom: UNIT_BASED._0_2,
+        alignContent: 'flex-start',
+        backgroundColor: '#042f07',
+        // shadowColor: "#fff", shadowOffset: { width: 0, height: 2, }, shadowOpacity: 1, shadowRadius: 20, elevation: 5
+    },
+    definitionUnit: {
+        flex: 1, alignItems: 'center', justifyContent: 'center'
+    },
+    definitionIcon: {
+        fontFamily: 'keyicons',
+        fontSize: UNIT * 0.9,
+        textAlign: 'center',
+        alignItems: 'center',
+        justifyContent: 'center',
+        textShadowOffset: {width: 1, height: 1},
+        textShadowRadius: UNIT_BASED._0_2,
+        textShadowColor: "#000000"
+    },
+    definitionText: {
+        textAlign: 'center',
+    },
+    optionsContainer: {
+        flex: 4,
+        // height: "100%",
+        marginLeft: UNIT,
+        // paddingRight: HALF_UNIT
+    },
+    optionsTopFade: {
+        width: '100%',
+        height: UNIT * 0.3,
+        position: 'absolute',
+        top: 0,
+        right: 0,
+        zIndex: 1,
+        opacity: 0.5,
+        backgroundColor: '#111111',
+    },
+    optionsBottomFade: {
+        width: '100%',
+        height: UNIT_BASED._0_4,
+        position: 'absolute',
+        bottom: 0,
+        right: 0,
+        zIndex: 1,
+        opacity: 0.5,
+        backgroundColor: '#111111',
+    },
+    optionsListContainer: {
+        flex: 1,
+        // height: "100%",
+        flexDirection: "row",
+        flexWrap: 'wrap',
+        justifyContent: 'space-between',
+        // paddingLeft: HALF_UNIT,
+        // paddingRight: HALF_UNIT,
+        paddingTop: UNIT_BASED._0_2,
+        backgroundColor: '#111111'
+        // shadowColor: "#fff", shadowOffset: { width: 0, height: 10, }, shadowOpacity: 1, shadowRadius: 40, elevation: 5
+    },
+    optionsListItemIcon: {
+        fontFamily: 'keyicons',
+        fontSize: UNIT_BASED._0_8,
+        color: '#00ff19',
+        // flex: 1,
+        textAlign: 'center',
+        alignItems: 'center', justifyContent: 'center',
+        padding: UNIT / 4,
+        margin: UNIT / 10,
+        width: UNIT * 1.7,
+        // backgroundColor: "#ffb700",
+        // borderBottomWidth: 2,
+        // borderColor: '#00ff19',
+    }
+});

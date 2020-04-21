@@ -1,0 +1,1 @@
+export default {name: 'Five little monkeys', gimmick: 'T', params: {id: 'id05', partiture: []}};

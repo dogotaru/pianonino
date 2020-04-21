@@ -4,7 +4,7 @@ import React, {useEffect, useState, useMemo} from "react";
 import {View, Text, TouchableWithoutFeedback} from "react-native";
 import {useSpring} from "react-spring";
 import {CSS_HOME_SCREEN as CSS} from "../constants/Styles";
-import {HOME_BUTTON_SIZE, UNIT, ViewAnimated} from "../constants/Layout";
+import {HEIGHT, HOME_BUTTON_SIZE, UNIT, ViewAnimated, WIDTH} from "../constants/Layout";
 import {Ionicons} from "@expo/vector-icons";
 
 export default function HomeScreen(props) {
@@ -12,6 +12,7 @@ export default function HomeScreen(props) {
     const [rotate, setRotate] = useSpring(() => ({from: {rotate: "0deg"}}));
     const [settingsInterval, setSettingsInterval] = useState(null);
     const [audioTimeout, setAudioTimeout] = useState(null);
+    const [showWaitOverlay, setShowWaitOverlay] = useState(true);
     const assets = useMemo(() => props.screenProps.assets, [props.screenProps.assets]);
     const isFocused = useIsFocused();
 
@@ -40,6 +41,7 @@ export default function HomeScreen(props) {
             clearInterval(settingsInterval);
             clearInterval(audioTimeout);
         }
+        setTimeout(() => setShowWaitOverlay(false), 200);
     }, [isFocused]);
 
     useEffect(() => {
@@ -54,7 +56,9 @@ export default function HomeScreen(props) {
         }
     }, []);
 
-    return <View style={CSS.container}>
+    return <View style={{...CSS.container}}>
+
+        {showWaitOverlay && <View style={{position: 'absolute', top: 0, left: 0, width: WIDTH, height: HEIGHT, backgroundColor: '#000000', zIndex: 99}} />}
 
         <TouchableWithoutFeedback accessibilityIgnoresInvertColors={true} onPress={() => {
 

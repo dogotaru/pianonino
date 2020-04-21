@@ -1,0 +1,1 @@
+export default {name: 'BINGO', gimmick: 'T', params: {id: 'id01', partiture: []}};

@@ -1,18 +1,12 @@
 import React, {useEffect, useState} from "react";
 import {View, Text, TouchableHighlight, FlatList, TouchableWithoutFeedback} from "react-native";
-import {CSS_PIANO_SCREEN, CSS_HOME_SCREEN as CSS, CSS_SIDE_BUTTON_CONTAINER} from "../constants/Styles";
+import {CSS_SETTINGS_SCREEN as CSS, CSS_SIDE_BUTTON_CONTAINER} from "../constants/Styles";
 import {
-    UNIT,
-    BORDER_WIDTH,
-    HEIGHT,
-    TextAnimated,
-    ViewAnimated,
-    WIDTH
+    UNIT_BASED
 } from "../constants/Layout";
 import {StackActions} from "react-navigation";
 import {useSpring} from "react-spring";
 import Button from "../components/Button";
-import Piano from "../components/Piano";
 import {Ionicons} from "@expo/vector-icons";
 
 export default function SettingsScreen(props) {
@@ -128,28 +122,8 @@ export default function SettingsScreen(props) {
                     }}/>}
             </View>
 
-            <View style={{
-                // paddingTop: UNIT * 0.35,
-                flex: 1,
-                zIndex: -1,
-                flexDirection: "column",
-            }}>
-                <View style={{
-                    // paddingTop: UNIT * 0.35,
-                    flex: 1,
-                    zIndex: -1,
-                    height: UNIT,
-                    flexDirection: "row",
-                    flexWrap: 'wrap',
-                    marginLeft: UNIT,
-                    // marginRight: UNIT,
-                    // marginBottom: UNIT * 0.2,
-                    paddingTop: UNIT * 0.2,
-                    paddingBottom: UNIT * 0.2,
-                    alignContent: 'flex-start',
-                    backgroundColor: '#042f07',
-                    // shadowColor: "#fff", shadowOffset: { width: 0, height: 2, }, shadowOpacity: 1, shadowRadius: 20, elevation: 5
-                }}>
+            <View style={CSS.content}>
+                <View style={CSS.definitionRow}>
                     {noteIconMapping.map(({icon, name, selected, mapped}, index) =>
                         <TouchableWithoutFeedback key={index} accessibilityIgnoresInvertColors={true} onPress={() => {
 
@@ -158,23 +132,16 @@ export default function SettingsScreen(props) {
                                 selected: item.name === name
                             })));
                         }}>
-                            <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+                            <View style={CSS.definitionUnit}>
                                 {mapped
                                     ? <Text style={{
-                                        fontFamily: 'keyicons',
-                                        fontSize: UNIT * 0.9,
-                                        color: `${selected ? "#00ff19" : mapped ? '#ffb700' : "#ffffff"}`,
-                                        textAlign: 'center',
-                                        alignItems: 'center',
-                                        justifyContent: 'center',
-                                        textShadowOffset: {width: 1, height: 1},
-                                        textShadowRadius: UNIT * 0.2,
-                                        textShadowColor: "#000000"
+                                        ...CSS.definitionIcon,
+                                        color: `${selected ? "#00ff19" : mapped ? '#ffb700' : "#ffffff"}`
                                     }}>{icon}</Text>
-                                    : <Ionicons name={icon} size={UNIT * 0.8}
+                                    : <Ionicons name={icon} size={UNIT_BASED._0_8}
                                                 color={selected ? "#00ff19" : "#ffffff"}/>}
                                 <Text style={{
-                                    textAlign: 'center',
+                                    ...CSS.definitionText,
                                     color: `${selected ? "#00ff19" : mapped ? '#ffb700' : "#ffffff"}`
                                 }}>{name}</Text>
                             </View>
@@ -183,54 +150,16 @@ export default function SettingsScreen(props) {
                 </View>
 
 
-                <View style={{
-                    // paddingTop: UNIT * 0.35,
-                    flex: 4,
-                    // height: "100%",
-                    marginLeft: UNIT / 1,
-                    // paddingRight: UNIT / 2
-                }}>
-                    <View style={{
-                        width: '100%',
-                        height: UNIT * 0.3,
-                        position: 'absolute',
-                        top: 0,
-                        right: 0,
-                        zIndex: 1,
-                        opacity: 0.5,
-                        backgroundColor: '#111111',
-                        blurRadius: 10
-                    }}/>
-                    <View style={{
-                        width: '100%',
-                        height: UNIT * 0.4,
-                        position: 'absolute',
-                        bottom: 0,
-                        right: 0,
-                        zIndex: 1,
-                        opacity: 0.5,
-                        backgroundColor: '#111111',
-                        blurRadius: 10
-                    }}/>
+                <View style={CSS.optionsContainer}>
+                    <View style={CSS.optionsTopFade}/>
+                    <View style={CSS.optionsBottomFade}/>
                     <FlatList
                         initialScrollIndex={0}
                         data={[{id: 0, dummy: 'a'}]}
                         keyExtractor={(item, index) => `dummy-${index}`}
                         renderItem={({item}) => {
                             const isOneSelected = !!noteIconMapping.filter(({selected}) => selected).length;
-                            return <View style={{
-                                // paddingTop: UNIT * 0.35,
-                                flex: 1,
-                                // height: "100%",
-                                flexDirection: "row",
-                                flexWrap: 'wrap',
-                                justifyContent: 'space-between',
-                                // paddingLeft: UNIT / 2,
-                                // paddingRight: UNIT / 2,
-                                paddingTop: UNIT * 0.2,
-                                backgroundColor: '#111111'
-                                // shadowColor: "#fff", shadowOffset: { width: 0, height: 10, }, shadowOpacity: 1, shadowRadius: 40, elevation: 5
-                            }}>
+                            return <View style={CSS.optionsListContainer}>
                                 {[
                                     {letter: '0'},
                                     {letter: '9'},
@@ -313,16 +242,7 @@ export default function SettingsScreen(props) {
                                                 }) : item));
                                         }}>
                                         <Text style={{
-                                            fontFamily: 'keyicons', fontSize: UNIT * 0.8, color: '#00ff19',
-                                            // flex: 1,
-                                            textAlign: 'center',
-                                            alignItems: 'center', justifyContent: 'center',
-                                            padding: UNIT / 4,
-                                            margin: UNIT / 10,
-                                            width: UNIT * 1.7,
-                                            // backgroundColor: "#ffb700",
-                                            // borderBottomWidth: 2,
-                                            // borderColor: '#00ff19',
+                                            ...CSS.optionsListItemIcon,
                                             opacity: isOneSelected ? 1 : 0.6
                                         }}>{letter}</Text>
                                     </TouchableWithoutFeedback>

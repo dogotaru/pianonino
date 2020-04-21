@@ -1,0 +1,1 @@
+export default {name: 'Frere Jacques', gimmick: 'T', params: {id: 'id06', partiture: []}};

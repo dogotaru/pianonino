@@ -3,9 +3,7 @@ import {View, Text} from "react-native";
 import {CSS_COMPOSER_SCREEN as CSS, CSS_SIDE_BUTTON_CONTAINER} from "../constants/Styles";
 import {
     COMPOSER_SCREEN_NOTE_SLICE_UNIT,
-    UNIT,
-    ViewAnimated,
-    WIDTH
+    ViewAnimated
 } from "../constants/Layout";
 import {StackActions} from "react-navigation";
 import {useSpring} from "react-spring";

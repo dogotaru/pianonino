@@ -1,0 +1,1 @@
+export default {name: 'Kalinka', gimmick: 'T', params: {id: 'id07', partiture: []}};

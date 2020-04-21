@@ -6,11 +6,16 @@ import {Audio} from "expo-av";
 import * as Font from 'expo-font';
 import * as SecureStore from 'expo-secure-store';
 import {CSS_APP} from "./constants/Styles";
+import {HALF_WIDTH, UNIT, ViewAnimated, WIDTH} from "./constants/Layout";
+import {useSpring} from "react-spring";
 
 export const delay = ms => new Promise(res => setTimeout(res, ms));
 
 export default function App(props) {
     const [isLoadingComplete, setLoadingComplete] = useState(false);
+    const [loader, setLoader] = useSpring(() => ({
+        from: {width: 0, backgroundColor: "#00ff19"}, to: [{width: WIDTH * 0.36, backgroundColor: "#ffb700"}], config: {duration: 3000}
+    }));
     const [assets, setAssets] = useState({
         mixNotes01: new Audio.Sound(),
         mixNotes02: new Audio.Sound(),
@@ -22,13 +27,13 @@ export default function App(props) {
         straussVoicesOfSpringWaltzPiano: new Audio.Sound(),
         menuItem: new Audio.Sound(),
         noteIconMapping: {
-            c: 'C',
-            d: 'D',
-            e: 'E',
-            f: 'F',
-            g: 'G',
-            a: 'A',
-            b: 'B'
+            c: '1',
+            d: '2',
+            e: '3',
+            f: '4',
+            g: '5',
+            a: '6',
+            b: '7'
         },
         mappingPersists: false
     });
@@ -68,7 +73,7 @@ export default function App(props) {
 
         !assets.menuItem._loaded && loadResourcesAsync().then(async () => {
 
-            await delay(1000);
+            await delay(5000);
             setLoadingComplete(true);
         });
     }, []);
@@ -86,6 +91,7 @@ export default function App(props) {
             assets.menuItem.loadAsync(require("./assets/audio/menu-item.mp3")),
 
             Asset.loadAsync([
+                require('./assets/images/splash2.png'),
                 require('./assets/images/flags/it.png'),
                 require('./assets/images/flags/ro.png'),
                 require('./assets/images/flags/ru.png'),
@@ -99,7 +105,7 @@ export default function App(props) {
             }),
 
             Font.loadAsync({
-                'keyicons': require('./assets/fonts/keyiconsenhanced.ttf'),
+                'keyicons': require('./assets/fonts/keyiconsenhanced05.ttf'),
                 'happyday': require('./assets/fonts/HappyDayatSchool.ttf'),
                 'funnykid': require('./assets/fonts/FunnyKid.ttf'),
                 'roboto': require('./assets/fonts/Roboto-Regular.ttf'),
@@ -118,7 +124,10 @@ export default function App(props) {
     if (!isLoadingComplete && !props.skipLoadingScreen) {
         return (
             <View style={CSS_APP.loaderContainer}>
-                <Text style={CSS_APP.loaderContent}>Loading...</Text>
+                <Image style={{alignSelf: 'center', height:'80%', aspectRatio: 1, position: 'relative', top: '-8%'}} source={require('./assets/images/splash2.png')} />
+                <View style={{alignSelf: 'center', position: 'absolute', top: "55%", lef: "32%", width: '36%', zIndex: 99, backgroundColor: "#222222"}}>
+                    <ViewAnimated style={{width: loader.width, height: UNIT / 30, backgroundColor: loader.backgroundColor}} />
+                </View>
             </View>
         );
     } else {

@@ -116,8 +116,6 @@ const SCREEN_CONTAINER_DEFAULT = {
     alignItems: 'center',
     paddingHorizontal: 10,
     backgroundColor: "#000000",
-    // borderWidth: 5,
-    // borderColor: "#ffff00",
     // width: WIDTH,
     // height: HEIGHT
 }
@@ -236,9 +234,9 @@ export const CSS_PERFORMER_SCREEN = StyleSheet.create({
         fontFamily: 'opensans',
         textAlign: 'center',
         fontSize: UNIT * 2, color: "#00c4ff", fontWeight: 'bold',
-        textShadowOffset: {width: 0, height: 0},
-        textShadowRadius: UNIT_BASED._1_5,
-        textShadowColor: "#000000"
+        // textShadowOffset: {width: 0, height: 0},
+        // textShadowRadius: UNIT_BASED._1_5,
+        // textShadowColor: "#000000"
     },
     animatedCongratsNoteContainer: {
         transform: [{rotate: "160deg"}]
@@ -335,7 +333,34 @@ export const CSS_COMPOSER_SCREEN = StyleSheet.create({
 export const CSS_HELP_SCREEN = StyleSheet.create({
     container: {
         ...SCREEN_CONTAINER_DEFAULT,
-        backgroundColor: "#ffffff"
+        // borderWidth: 2,
+        // borderColor: "#ff0000",
+        paddingHorizontal: 0,
+        // backgroundColor: "#ffffff"
+    },
+    tutorialsContainer: {
+        flex: 1,
+        // borderWidth: 2,
+        // borderColor: "#ffff00",
+        // marginLeft: UNIT * 1.5,
+        // marginTop: HALF_UNIT / 2,
+        // paddingRight: HALF_UNIT
+    },
+    tutorialsListContainer: {
+        flex: 1,
+        width: '100%',
+        // borderWidth: 2,
+        // borderColor: "#00ffff",
+        // height: "100%",
+        flexDirection: "column",
+        // flexWrap: 'wrap',
+        // justifyContent: 'space-between',
+        // paddingLeft: HALF_UNIT,
+        // paddingRight: HALF_UNIT,
+        paddingTop: UNIT_BASED._0_2,
+        paddingBottom: UNIT_BASED._0_4,
+        // backgroundColor: '#111111',
+        // shadowColor: "#fff", shadowOffset: { width: 0, height: 10, }, shadowOpacity: 1, shadowRadius: 40, elevation: 5
     },
 });
 
@@ -370,9 +395,9 @@ export const CSS_SETTINGS_SCREEN = StyleSheet.create({
         textAlign: 'center',
         alignItems: 'center',
         justifyContent: 'center',
-        textShadowOffset: {width: 1, height: 1},
-        textShadowRadius: UNIT_BASED._0_2,
-        textShadowColor: "#000000"
+        // textShadowOffset: {width: 1, height: 1},
+        // textShadowRadius: UNIT_BASED._0_2,
+        // textShadowColor: "#000000"
     },
     definitionText: {
         textAlign: 'center',

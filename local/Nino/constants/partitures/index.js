@@ -6,9 +6,13 @@ import TwinkleTwinkle from "./TwinkleTwinkle"
 import FiveLittleMonkeys from "./FiveLittleMonkeys";
 import Kalinka from "./Kalinka";
 import FrereJacques from "./FrereJacques";
+import JingleBells from "./JingleBells";
+import HappyBirthday from "./HappyBirthday";
+import ItsyBitsySpider from "./ItsyBitsySpider";
 
 export default [
-    BINGO, JiliUBabusi, OldMcDonald, TwinkleTwinkle,
-    FiveLittleMonkeys, FrereJacques, Kalinka,
+    JiliUBabusi, OldMcDonald, TwinkleTwinkle,
+    BINGO, FiveLittleMonkeys, FrereJacques, Kalinka,
+    JingleBells, HappyBirthday, ItsyBitsySpider,
     Debug
 ];

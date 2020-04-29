@@ -73,7 +73,7 @@ export default function App(props) {
 
         !assets.menuItem._loaded && loadResourcesAsync().then(async () => {
 
-            await delay(5000);
+            await delay(3000);
             setLoadingComplete(true);
         });
     }, []);
@@ -95,7 +95,10 @@ export default function App(props) {
                 require('./assets/images/flags/it.png'),
                 require('./assets/images/flags/ro.png'),
                 require('./assets/images/flags/ru.png'),
-                require('./assets/images/flags/us.png')
+                require('./assets/images/flags/us.png'),
+                require("./assets/video/tutorial-01.mp4"),
+                require("./assets/video/tutorial-02.mp4"),
+                require("./assets/video/tutorial-03.mp4")
             ]),
 
             SecureStore.getItemAsync('_noteIconMapping').then((_noteIconMapping) => {
@@ -124,7 +127,7 @@ export default function App(props) {
     if (!isLoadingComplete && !props.skipLoadingScreen) {
         return (
             <View style={CSS_APP.loaderContainer}>
-                <Image style={{alignSelf: 'center', height:'80%', aspectRatio: 1, position: 'relative', top: '-8%'}} source={require('./assets/images/splash2.png')} />
+                <Image style={{alignSelf: 'center', resizeMode: 'contain', width:'38%', aspectRatio: 2/11, position: 'relative', top: '-8%'}} source={require('./assets/images/splash2.png')} />
                 <View style={{alignSelf: 'center', position: 'absolute', top: "55%", lef: "32%", width: '36%', zIndex: 99, backgroundColor: "#222222"}}>
                     <ViewAnimated style={{width: loader.width, height: UNIT / 30, backgroundColor: loader.backgroundColor}} />
                 </View>

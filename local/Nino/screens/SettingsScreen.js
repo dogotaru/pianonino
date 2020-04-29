@@ -12,6 +12,7 @@ import {Ionicons} from "@expo/vector-icons";
 export default function SettingsScreen(props) {
 
     // const [currentNote, setCurrentNote] = useState([]);
+    const [startedChange, setStartedChange] = useState(false);
     const [noteIconMapping, setNoteIconMapping] = useState([
         {icon: 'md-qr-scanner', name: "do / C", notation: 'c', selected: false, mapped: false},
         {icon: 'md-qr-scanner', name: "re / D", notation: 'd', selected: false, mapped: false},
@@ -106,7 +107,7 @@ export default function SettingsScreen(props) {
                         ));
                         props.screenProps.assets.clink.replayAsync();
                     }}/>
-                {noteIconMapping.filter(({mapped}) => mapped).length === 7 && <Button
+                {noteIconMapping.filter(({mapped}) => mapped).length === 7 && startedChange && <Button
                     color={"#00ff19"}
                     ionicon={"md-save"}
                     pushAction={() => {
@@ -116,9 +117,22 @@ export default function SettingsScreen(props) {
                         });
                         props.screenProps.assets.setNoteIconMapping(_noteIconMapping).then(() => {
 
+                            setStartedChange(false);
                             props.screenProps.assets.menuItem.replayAsync();
-                            props.navigation.dispatch(StackActions.push({routeName: 'Composer'}));
+                            // props.navigation.dispatch(StackActions.push({routeName: 'Composer'}));
                         });
+                    }}/>}
+                {startedChange && <Button
+                    color={"#00ff19"}
+                    ionicon={"md-close-circle"}
+                    pushAction={() => {
+                        setStartedChange(false);
+                        setNoteIconMapping(noteIconMapping.map((item) => ({
+                            ...item,
+                            icon: props.screenProps.assets.noteIconMapping[item.notation],
+                            selected: false,
+                            mapped: true
+                        })));
                     }}/>}
             </View>
 
@@ -129,7 +143,11 @@ export default function SettingsScreen(props) {
 
                             setNoteIconMapping(noteIconMapping.map((item) => ({
                                 ...item,
-                                selected: item.name === name
+                                selected: (() => {
+
+                                    !selected && setStartedChange(true);
+                                    return selected ? false : item.name === name
+                                })()
                             })));
                         }}>
                             <View style={CSS.definitionUnit}>

@@ -12,7 +12,8 @@ export const CSS_APP = StyleSheet.create({
         height: HEIGHT,
         width: WIDTH,
         backgroundColor: '#000000',
-        resizeMode: 'contain'
+        resizeMode: 'contain',
+        // borderColor: "#ffff00", borderWidth: 2
     },
     loaderContent: {
         textAlign: 'center',
@@ -45,11 +46,12 @@ export const CSS_SIDE_BUTTON = StyleSheet.create({
 export const CSS_SIDE_BUTTON_CONTAINER = StyleSheet.create({
     sidebar: {
         position: 'absolute',
-        top: Math.trunc(UNIT * 0.16),
+        top: Math.trunc(UNIT * 0.25),
         left: Math.trunc(UNIT * 0.08),
         flex: 1,
         flexDirection: 'column',
         justifyContent: 'flex-start',
+        zIndex: 1
         // borderWidth: 1,
         // borderColor: '#ff0000'
     }
@@ -116,6 +118,7 @@ const SCREEN_CONTAINER_DEFAULT = {
     alignItems: 'center',
     paddingHorizontal: 10,
     backgroundColor: "#000000",
+    zIndex: 0
     // width: WIDTH,
     // height: HEIGHT
 }

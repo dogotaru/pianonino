@@ -93,7 +93,7 @@ export default function App(props) {
             Asset.loadAsync([
                 require('./assets/images/splash2.png'),
                 require('./assets/images/flags/it.png'),
-                require('./assets/images/flags/ro.png'),
+                require('./assets/images/flags/fr.png'),
                 require('./assets/images/flags/ru.png'),
                 require('./assets/images/flags/us.png'),
                 require("./assets/video/tutorial-01.mp4"),
@@ -108,7 +108,7 @@ export default function App(props) {
             }),
 
             Font.loadAsync({
-                'keyicons': require('./assets/fonts/keyiconsenhanced05.ttf'),
+                'keyicons': require('./assets/fonts/keyiconsenhanced06.ttf'),
                 'happyday': require('./assets/fonts/HappyDayatSchool.ttf'),
                 'funnykid': require('./assets/fonts/FunnyKid.ttf'),
                 'roboto': require('./assets/fonts/Roboto-Regular.ttf'),
@@ -127,9 +127,13 @@ export default function App(props) {
     if (!isLoadingComplete && !props.skipLoadingScreen) {
         return (
             <View style={CSS_APP.loaderContainer}>
-                <Image style={{alignSelf: 'center', resizeMode: 'contain', width:'38%', aspectRatio: 2/11, position: 'relative', top: '-8%'}} source={require('./assets/images/splash2.png')} />
-                <View style={{alignSelf: 'center', position: 'absolute', top: "55%", lef: "32%", width: '36%', zIndex: 99, backgroundColor: "#222222"}}>
-                    <ViewAnimated style={{width: loader.width, height: UNIT / 30, backgroundColor: loader.backgroundColor}} />
+                <View style={{alignItems: 'center', justifyContent: 'center', position: 'absolute', top: -UNIT, left: 0, right: 0, bottom: 0, zIndex: 98}}>
+                    <Image style={{alignSelf: 'center', resizeMode: 'contain', height: UNIT * 8}} source={require('./assets/images/splash2.png')} />
+                </View>
+                <View style={{alignItems: 'center', justifyContent: 'center', position: 'absolute', top: UNIT, left: 0, right: 0, bottom: 0, zIndex: 99}}>
+                    <View style={{alignSelf: 'center', width: UNIT * 6, zIndex: 99, backgroundColor: "#222222"}}>
+                        <ViewAnimated style={{width: loader.width, height: UNIT / 30, backgroundColor: loader.backgroundColor}} />
+                    </View>
                 </View>
             </View>
         );

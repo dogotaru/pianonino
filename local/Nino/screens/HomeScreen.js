@@ -66,6 +66,10 @@ export default function HomeScreen(props) {
             props.navigation.dispatch(StackActions.push({routeName: 'Composer'}));
         }}>
             <View>
+                {/*<View style={{position: "absolute"}}>
+                    <Ionicons name={"ios-square"} size={HOME_BUTTON_SIZE.image}
+                              color={"#333333"}/>
+                </View>*/}
                 <Ionicons name={'md-musical-note'} size={HOME_BUTTON_SIZE.image} color="#00ff19"/>
                 <Text style={{...CSS.buttonText, color: '#00ff19'}}>Composer</Text>
             </View>
@@ -77,6 +81,10 @@ export default function HomeScreen(props) {
             props.navigation.dispatch(StackActions.push({routeName: 'PerformerSelector'}));
         }}>
             <View>
+                {/*<View style={{position: "absolute"}}>
+                    <Ionicons name={"ios-square"} size={HOME_BUTTON_SIZE.image}
+                              color={"#333333"}/>
+                </View>*/}
                 <Ionicons name={'md-musical-notes'} size={HOME_BUTTON_SIZE.image} color="#00c4ff"/>
                 <Text style={{...CSS.buttonText, color: '#00c4ff'}}>Performer</Text>
             </View>
@@ -88,6 +96,10 @@ export default function HomeScreen(props) {
             props.navigation.dispatch(StackActions.push({routeName: 'Settings'}));
         }}>
             <View>
+                {/*<View style={{position: "absolute"}}>
+                    <Ionicons name={"ios-square"} size={HOME_BUTTON_SIZE.image}
+                              color={"#333333"}/>
+                </View>*/}
                 <ViewAnimated style={{
                     ...CSS.buttonIconAnimatedContainer,
                     transform: [((_rotate) => { /*console.log('-----------',_rotate);*/
@@ -106,6 +118,10 @@ export default function HomeScreen(props) {
             props.navigation.dispatch(StackActions.push({routeName: 'Help'}));
         }}>
             <View>
+                {/*<View style={{position: "absolute", marginLeft: -UNIT / 2}}>
+                    <Ionicons name={"ios-square"} size={HOME_BUTTON_SIZE.image}
+                              color={"#333333"}/>
+                </View>*/}
                 <Ionicons name={'md-help'} size={HOME_BUTTON_SIZE.image} color="#d900ff"/>
                 <Text style={{...CSS.buttonText, color: '#d900ff'}}>How to</Text>
             </View>

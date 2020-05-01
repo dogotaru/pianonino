@@ -65,10 +65,10 @@ export default function FlexKeyButton({style, keyColor, ...props}) {
                     backgroundColor: firstClick ? "#bbbbbb" : style.backgroundColor
                 }}>
                     <Text/>
-                    {props.ton && <Text style={{
+                    {props.ton ? <Text style={{
                         ...CSS_PIANO_FLEX_KEY.icon,
                         color: firstClick ? "#ffffff" : props.color
-                    }}>{props.ionicon}</Text>}
+                    }}>{props.ionicon}</Text> : <Text style={{color: "#ffffff"}}>#</Text>}
                 </View>
             </TouchableWithoutFeedback>
         </View>

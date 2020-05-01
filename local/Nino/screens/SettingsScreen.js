@@ -71,6 +71,7 @@ export default function SettingsScreen(props) {
                     color={"#ffb700"}
                     ionicon={require('../assets/images/flags/it.png')}
                     pushAction={() => {
+                        setStartedChange(true);
                         const country = {c: 'U', d: 'h', e: 'S', f: 'e', g: '0', a: 'i', b: 'o'};
                         setNoteIconMapping(noteIconMapping.map((item, index) =>
                             ({...item, mapped: true, icon: country[item.notation]})
@@ -79,9 +80,10 @@ export default function SettingsScreen(props) {
                     }}/>
                 <Button
                     color={"#ffb700"}
-                    ionicon={require('../assets/images/flags/ro.png')}
+                    ionicon={require('../assets/images/flags/fr.png')}
                     pushAction={() => {
-                        const country = {c: 'U', d: 'h', e: 'S', f: 'e', g: '0', a: 'i', b: 'o'};
+                        setStartedChange(true);
+                        const country = {c: 'U', d: '*', e: 'Q', f: 'e', g: '0', a: 'i', b: 'o'};
                         setNoteIconMapping(noteIconMapping.map((item, index) =>
                             ({...item, mapped: true, icon: country[item.notation]})
                         ));
@@ -91,6 +93,7 @@ export default function SettingsScreen(props) {
                     color={"#ffb700"}
                     ionicon={require('../assets/images/flags/us.png')}
                     pushAction={() => {
+                        setStartedChange(true);
                         const country = {c: 'W', d: 'u', e: 'q', f: 'a', g: '9', a: 'l', b: 'y'};
                         setNoteIconMapping(noteIconMapping.map((item, index) =>
                             ({...item, mapped: true, icon: country[item.notation]})
@@ -101,12 +104,25 @@ export default function SettingsScreen(props) {
                     color={"#ffb700"}
                     ionicon={require('../assets/images/flags/ru.png')}
                     pushAction={() => {
+                        setStartedChange(true);
                         const country = {c: 'g', d: 's', e: 'O', f: 'N', g: 'w', a: 'd', b: 'r'};
                         setNoteIconMapping(noteIconMapping.map((item, index) =>
                             ({...item, mapped: true, icon: country[item.notation]})
                         ));
                         props.screenProps.assets.clink.replayAsync();
                     }}/>
+                {startedChange && <Button
+                    color={"#00ff19"}
+                    ionicon={"md-close-circle"}
+                    pushAction={() => {
+                        setStartedChange(false);
+                        setNoteIconMapping(noteIconMapping.map((item) => ({
+                            ...item,
+                            icon: props.screenProps.assets.noteIconMapping[item.notation],
+                            selected: false,
+                            mapped: true
+                        })));
+                    }}/>}
                 {noteIconMapping.filter(({mapped}) => mapped).length === 7 && startedChange && <Button
                     color={"#00ff19"}
                     ionicon={"md-save"}
@@ -121,18 +137,6 @@ export default function SettingsScreen(props) {
                             props.screenProps.assets.menuItem.replayAsync();
                             // props.navigation.dispatch(StackActions.push({routeName: 'Composer'}));
                         });
-                    }}/>}
-                {startedChange && <Button
-                    color={"#00ff19"}
-                    ionicon={"md-close-circle"}
-                    pushAction={() => {
-                        setStartedChange(false);
-                        setNoteIconMapping(noteIconMapping.map((item) => ({
-                            ...item,
-                            icon: props.screenProps.assets.noteIconMapping[item.notation],
-                            selected: false,
-                            mapped: true
-                        })));
                     }}/>}
             </View>
 
@@ -225,6 +229,9 @@ export default function SettingsScreen(props) {
                                     {letter: 'x'},
                                     {letter: 'y'},
                                     {letter: 'z'},
+                                    {letter: '8'},
+                                    {letter: '.'},
+                                    {letter: '*'},
                                     {letter: 'A'},
                                     {letter: 'B'},
                                     {letter: 'C'},

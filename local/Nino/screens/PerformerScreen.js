@@ -151,7 +151,6 @@ export default function PerformerScreen(props) {
                 style={CSS.piano}
                 assets={props.screenProps.assets}
                 callback={async (key) => {
-                    // sa ma uit la diezi
                     // console.log(key, key.ionicon, currentNote[0].ionicon, props.screenProps.assets.noteIconMapping[currentNote[0].ionicon[0]]);
                     const matched = key.ionicon === `${props.screenProps.assets.noteIconMapping[currentNote[0].ionicon[0]]}${currentNote[0].ionicon[1] || ""}`;
                     if (currentNote.length > 0 && matched && key.color === currentNote[0].color) {

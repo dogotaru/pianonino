@@ -28,6 +28,7 @@ import PollyPutTheKettleOn from "./PollyPutTheKettleOn";
 import RowYourBoat from "./RowYourBoat";
 import ItsRainingItsPouring from "./ItsRainingItsPouring";
 import TenInTheBed from "./TenInTheBed";
+import ToccataFugueDMinor from "./ToccataFugueDMinor";
 
 export default [
     OldMcDonald, TwinkleTwinkle, ARamSamSam,
@@ -39,5 +40,5 @@ export default [
     FiveLittleDucks, HeadShouldersKneesToes, HumptyDumpty,
     JohnyJohnyYesPapa, LondonBridgeIsFallingDown, OhMyDarlingClementine,
     PollyPutTheKettleOn, RowYourBoat, ItsRainingItsPouring,
-    TenInTheBed
+    TenInTheBed, ToccataFugueDMinor
 ];

@@ -1,5 +1,5 @@
 export default {
-    name: 'Fur Elise', gimmick: 'T', params: {
+    name: 'Beethoven - Fur Elise', gimmick: 'T', params: {
         id: 'id-fur-elise', partiture: [
             {color: '#d900ff', ionicon: 'e'},
             {color: '#d900ff', ionicon: 'd#'},

@@ -33,15 +33,18 @@ export default function PerformerScreen(props) {
             });
         } else if (currentNote.length === 0 && isStarted) {
 
-            props.screenProps.assets.clap.replayAsync();
-            props.screenProps.assets.goodJob.replayAsync();
+            setTimeout(() => {
 
-            setCongratsWobble({
-                from: {scale: 0, opacity: 0, height: 0},
-                to: [
-                    {opacity: 1, scale: 1/*, height: HEIGHT*/}
-                ], config: {easing: "d3-easing"}, reset: true/*, onRest: () => setShowColorName("")*/
-            });
+                props.screenProps.assets.clap.replayAsync();
+                props.screenProps.assets.goodJob.replayAsync();
+
+                setCongratsWobble({
+                    from: {scale: 0, opacity: 0, height: 0},
+                    to: [
+                        {opacity: 1, scale: 1/*, height: HEIGHT*/}
+                    ], config: {easing: "d3-easing"}, reset: true/*, onRest: () => setShowColorName("")*/
+                });
+            }, 200);
         }
     }, [currentNote]);
 

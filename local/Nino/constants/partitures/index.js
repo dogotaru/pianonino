@@ -9,10 +9,35 @@ import FrereJacques from "./FrereJacques";
 import JingleBells from "./JingleBells";
 import HappyBirthday from "./HappyBirthday";
 import ItsyBitsySpider from "./ItsyBitsySpider";
+import MaryHadaLittleLamb from "./MaryHadaLittleLamb";
+import IfYouHappyAndYouKnowIt from "./IfYouHappyAndYouKnowIt";
+import WeWishYouAMerryChristmas from "./WeWishYouAMerryChristmas";
+import Antoshka from "./Antoshka";
+import ProKuznechika from "./ProKuznechika";
+import FurElise from "./FurElise";
+import FingerFamilySong from "./FingerFamilySong";
+import RockAByeBaby from "./RockAByeBaby";
+import ARamSamSam from "./ARamSamSam";
+import FiveLittleDucks from "./FiveLittleDucks";
+import HeadShouldersKneesToes from "./HeadShouldersKneesToes";
+import HumptyDumpty from "./HumptyDumpty";
+import JohnyJohnyYesPapa from "./JohnyJohnyYesPapa";
+import LondonBridgeIsFallingDown from "./LondonBridgeIsFallingDown";
+import OhMyDarlingClementine from "./OhMyDarlingClementine";
+import PollyPutTheKettleOn from "./PollyPutTheKettleOn";
+import RowYourBoat from "./RowYourBoat";
+import ItsRainingItsPouring from "./ItsRainingItsPouring";
+import TenInTheBed from "./TenInTheBed";
 
 export default [
-    JiliUBabusi, OldMcDonald, TwinkleTwinkle,
+    OldMcDonald, TwinkleTwinkle, ARamSamSam,
     BINGO, FiveLittleMonkeys, FrereJacques, Kalinka,
     JingleBells, HappyBirthday, ItsyBitsySpider,
-    Debug
+    MaryHadaLittleLamb, IfYouHappyAndYouKnowIt,
+    WeWishYouAMerryChristmas, Antoshka, ProKuznechika,
+    JiliUBabusi, FurElise, FingerFamilySong, RockAByeBaby,
+    FiveLittleDucks, HeadShouldersKneesToes, HumptyDumpty,
+    JohnyJohnyYesPapa, LondonBridgeIsFallingDown, OhMyDarlingClementine,
+    PollyPutTheKettleOn, RowYourBoat, ItsRainingItsPouring,
+    TenInTheBed
 ];

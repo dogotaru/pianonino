@@ -1,5 +1,5 @@
 export default {
-    name: 'Twinkle twinkle', gimmick: 'T', params: {
+    name: 'Twinkle twinkle little star', gimmick: 'T', params: {
         id: 'id04', partiture: [
             {color: '#d900ff', ionicon: 'c'},
             {color: '#d900ff', ionicon: 'c'},

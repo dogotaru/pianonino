@@ -9,6 +9,7 @@ import {Ionicons} from "@expo/vector-icons";
 
 export default function HomeScreen(props) {
 
+    const [firstClick, setFirstClick] = useState(false);
     const [rotate, setRotate] = useSpring(() => ({from: {rotate: "0deg"}}));
     const [settingsInterval, setSettingsInterval] = useState(null);
     const [audioTimeout, setAudioTimeout] = useState(null);
@@ -26,6 +27,7 @@ export default function HomeScreen(props) {
         if (isFocused) {
 
             rotateSettings();
+            setFirstClick(false);
             setSettingsInterval(setInterval(rotateSettings, 2500));
             assets.backgroundAudio[assets.backgroundAudioLoop].getStatusAsync().then(({ isPlaying }) => {
                 if (!isPlaying) {
@@ -62,8 +64,12 @@ export default function HomeScreen(props) {
 
         <TouchableWithoutFeedback accessibilityIgnoresInvertColors={true} onPress={() => {
 
-            assets.menuItem.replayAsync();
-            props.navigation.dispatch(StackActions.push({routeName: 'Composer'}));
+            if (!firstClick) {
+
+                setFirstClick(true);
+                assets.menuItem.replayAsync();
+                props.navigation.dispatch(StackActions.push({routeName: 'Composer'}));
+            }
         }}>
             <View>
                 {/*<View style={{position: "absolute"}}>
@@ -77,8 +83,12 @@ export default function HomeScreen(props) {
         <View style={{width: UNIT}}/>
         <TouchableWithoutFeedback accessibilityIgnoresInvertColors={true} onPress={() => {
 
-            assets.menuItem.replayAsync();
-            props.navigation.dispatch(StackActions.push({routeName: 'PerformerSelector'}));
+            if (!firstClick) {
+
+                setFirstClick(true);
+                assets.menuItem.replayAsync();
+                props.navigation.dispatch(StackActions.push({routeName: 'PerformerSelector'}));
+            }
         }}>
             <View>
                 {/*<View style={{position: "absolute"}}>
@@ -92,8 +102,12 @@ export default function HomeScreen(props) {
         <View style={{width: UNIT}}/>
         <TouchableWithoutFeedback accessibilityIgnoresInvertColors={true} onPress={() => {
 
-            assets.menuItem.replayAsync();
-            props.navigation.dispatch(StackActions.push({routeName: 'Settings'}));
+            if (!firstClick) {
+
+                setFirstClick(true);
+                assets.menuItem.replayAsync();
+                props.navigation.dispatch(StackActions.push({routeName: 'Settings'}));
+            }
         }}>
             <View>
                 {/*<View style={{position: "absolute"}}>
@@ -114,8 +128,12 @@ export default function HomeScreen(props) {
         <View style={{width: UNIT}}/>
         <TouchableWithoutFeedback accessibilityIgnoresInvertColors={true} onPress={() => {
 
-            assets.menuItem.replayAsync();
-            props.navigation.dispatch(StackActions.push({routeName: 'Help'}));
+            if (!firstClick) {
+
+                setFirstClick(true);
+                assets.menuItem.replayAsync();
+                props.navigation.dispatch(StackActions.push({routeName: 'Help'}));
+            }
         }}>
             <View>
                 {/*<View style={{position: "absolute", marginLeft: -UNIT / 2}}>

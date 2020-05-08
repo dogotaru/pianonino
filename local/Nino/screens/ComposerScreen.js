@@ -47,6 +47,7 @@ export default function ComposerScreen(props) {
                     color={"#ff6114"}
                     ionicon={"md-trash"}
                     pushAction={() => {
+                        // console.log("ss");
                         props.screenProps.assets.menuItem.replayAsync();
                         setCurrentNote([]);
                     }}/>

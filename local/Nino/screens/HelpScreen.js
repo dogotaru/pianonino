@@ -8,9 +8,9 @@ import {Ionicons} from "@expo/vector-icons";
 import {HALF_UNIT, HOME_BUTTON_SIZE, UNIT, UNIT_BASED, WIDTH} from "../constants/Layout";
 
 const tutorials = {
-    Composer: {source: require("../assets/video/tutorial-01.mp4")},
-    Performer: {source: require("../assets/video/tutorial-02.mp4")},
-    Settings: {source: require("../assets/video/tutorial-03.mp4")}
+    Composer: {source: require("../assets/video/tutorial-01-optimized.mp4")},
+    Performer: {source: require("../assets/video/tutorial-02-optimized.mp4")},
+    Settings: {source: require("../assets/video/tutorial-03-optimized.mp4")}
 }
 
 export default function HelpScreen(props) {
@@ -151,12 +151,12 @@ export default function HelpScreen(props) {
                                     <View><Text style={{color: "#000000", paddingBottom: UNIT_BASED._0_2}}>
                                         You can switch icons one for another. There's no rule saying that you should chose icons only by phonetic resemblance.
                                         You could just chose the classical representations of how notes look on the staff, or their alphabetic representation,
-                                        or just, really, chose at your own will, inventing your own choice system.
+                                        or just, really, chose at your own will, invent your own choice system.
                                     </Text></View><View><Text style={{color: "#000000", paddingBottom: UNIT_BASED._0_2}}>
                                         We can add more, just rate our app and send us a few lines in the App Store or Google Play, and we will start preparing our next
                                         build.
                                     </Text></View><View><Text style={{color: "#000000", paddingBottom: UNIT_BASED._0_2}}>
-                                        Touch the video below and see hou the app settings work
+                                        Touch the video below and see how the app settings work
                                     </Text></View>
                                 </>
                             }

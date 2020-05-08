@@ -1,5 +1,5 @@
 export default {
-    name: 'Jili u babusi', gimmick: 'T', params: {
+    name: 'Жили у бабуси', gimmick: 'T', params: {
         id: 'id02', partiture: [
             {color: '#d900ff', ionicon: 'f'},
             {color: '#d900ff', ionicon: 'e'},

@@ -1,5 +1,5 @@
 export default {
-    name: 'Old McDonald had a farm', gimmick: 'T', params: {
+    name: 'Old MacDonald had a farm', gimmick: 'T', params: {
         id: 'id03', partiture: [
             {color: '#d900ff', ionicon: 'c'},
             {color: '#d900ff', ionicon: 'c'},

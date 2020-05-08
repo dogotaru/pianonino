@@ -51,7 +51,7 @@ export const CSS_SIDE_BUTTON_CONTAINER = StyleSheet.create({
         flex: 1,
         flexDirection: 'column',
         justifyContent: 'flex-start',
-        zIndex: 1
+        zIndex: 10
         // borderWidth: 1,
         // borderColor: '#ff0000'
     }
@@ -229,7 +229,7 @@ export const CSS_PERFORMER_SCREEN = StyleSheet.create({
         position: 'relative',
         top: -UNIT_BASED._0_65,
         // textTransform: "uppercase",
-        zIndex: 99,
+        zIndex: 9,
         // borderWidth: 1,
         // borderColor: "#ff0000"
     },
@@ -254,7 +254,8 @@ export const CSS_PERFORMER_SELECTOR_SCREEN = StyleSheet.create({
         zIndex: -1,
         // height: HEIGHT,
         flexDirection: "column",
-        marginRight: "5%",
+        marginRight: "4%",
+        paddingBottom: "1%",
         // borderRightWidth: HALF_UNIT,
         // borderColor: "#"
     },

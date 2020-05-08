@@ -1,0 +1,35 @@
+export default {
+    name: 'Wish you a Merry Christmas', gimmick: 'T', params: {
+        id: 'id-we-wish-you-a-merry-Christmas', partiture: [
+            {color: '#ffb700', ionicon: 'g'},
+            {color: '#d900ff', ionicon: 'c'},
+            {color: '#d900ff', ionicon: 'c'},
+            {color: '#d900ff', ionicon: 'd'},
+            {color: '#d900ff', ionicon: 'c'},
+            {color: '#ffb700', ionicon: 'b'},
+            {color: '#ffb700', ionicon: 'a'},
+            {color: '#ffb700', ionicon: 'a'},
+            {color: '#ffb700', ionicon: 'a'},
+            {color: '#d900ff', ionicon: 'd'},
+            {color: '#d900ff', ionicon: 'd'},
+            {color: '#d900ff', ionicon: 'e'},
+            {color: '#d900ff', ionicon: 'd'},
+            {color: '#d900ff', ionicon: 'c'},
+            {color: '#ffb700', ionicon: 'b'},
+            {color: '#ffb700', ionicon: 'g'},
+            {color: '#ffb700', ionicon: 'g'},
+            {color: '#d900ff', ionicon: 'e'},
+            {color: '#d900ff', ionicon: 'e'},
+            {color: '#d900ff', ionicon: 'f'},
+            {color: '#d900ff', ionicon: 'e'},
+            {color: '#d900ff', ionicon: 'd'},
+            {color: '#d900ff', ionicon: 'c'},
+            {color: '#ffb700', ionicon: 'a'},
+            {color: '#ffb700', ionicon: 'g'},
+            {color: '#ffb700', ionicon: 'g'},
+            {color: '#ffb700', ionicon: 'a'},
+            {color: '#d900ff', ionicon: 'd'},
+            {color: '#ffb700', ionicon: 'b'},
+            {color: '#d900ff', ionicon: 'c'}
+        ]}
+};

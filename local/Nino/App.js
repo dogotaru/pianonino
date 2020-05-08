@@ -80,9 +80,9 @@ export default function App(props) {
 
     async function loadResourcesAsync() {
         await Promise.all([
-            assets.mixNotes01.loadAsync(require("./assets/audio/notes/mix-notes-intervals-compressed-amplified.mp3")),
-            assets.mixNotes02.loadAsync(require("./assets/audio/notes/mix-notes-intervals-compressed-amplified.mp3")),
-            assets.mixNotes03.loadAsync(require("./assets/audio/notes/mix-notes-intervals-compressed-amplified.mp3")),
+            assets.mixNotes01.loadAsync(require("./assets/audio/notes/mix-notes-intervals-compressed-amplified-03.mp3")),
+            assets.mixNotes02.loadAsync(require("./assets/audio/notes/mix-notes-intervals-compressed-amplified-03.mp3")),
+            assets.mixNotes03.loadAsync(require("./assets/audio/notes/mix-notes-intervals-compressed-amplified-03.mp3")),
             assets.clap.loadAsync(require("./assets/audio/small-group-clapping-hands.mp3")),
             assets.goodJob.loadAsync(require("./assets/audio/good-job.mp3")),
             assets.clink.loadAsync(require("./assets/audio/collect-coin.mp3")),
@@ -96,9 +96,9 @@ export default function App(props) {
                 require('./assets/images/flags/fr.png'),
                 require('./assets/images/flags/ru.png'),
                 require('./assets/images/flags/us.png'),
-                require("./assets/video/tutorial-01.mp4"),
-                require("./assets/video/tutorial-02.mp4"),
-                require("./assets/video/tutorial-03.mp4")
+                require("./assets/video/tutorial-01-optimized.mp4"),
+                require("./assets/video/tutorial-02-optimized.mp4"),
+                require("./assets/video/tutorial-03-optimized.mp4")
             ]),
 
             SecureStore.getItemAsync('_noteIconMapping').then((_noteIconMapping) => {

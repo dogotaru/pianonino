@@ -19,22 +19,18 @@ export default function FlexKeyButton({style, keyColor, ...props}) {
             <TouchableWithoutFeedback
                 accessibilityIgnoresInvertColors={true}
                 pressRetentionOffset={{top: 0, left: 0, bottom: 0, right: 0}}
+                delayPressIn={0}
                 onPressIn={async () => {
 
-                    if (firstClick) {
-
-                    } else {
+                    // if (firstClick) {
+                    //
+                    // } else {
 
                         try {
-
-                            setTimeout(() => {
-                                setFirstClick(false);
-                            }, 100);
 
                             const audio = props.getAudioRunner();
                             if (audio) {
 
-                                props.callback(props.ionicon);
                                 audio
                                     .playFromPositionAsync(props.position.start)
                                     .then(async playbackStatus => {
@@ -49,7 +45,10 @@ export default function FlexKeyButton({style, keyColor, ...props}) {
                                     })
                                     .catch(error => {
                                         // console.log(error)
-                                    })
+                                    });
+
+                                props.callback(props.ionicon);
+
                             } else {
                                 // console.log("...");
                             }
@@ -57,8 +56,12 @@ export default function FlexKeyButton({style, keyColor, ...props}) {
                             // console.log(error)
                         }
 
+                        setTimeout(() => {
+                            setFirstClick(false);
+                        }, 100);
+
                         setFirstClick(true);
-                    }
+                    // }
                 }} title={props.key}>
                 <View style={{
                     ...CSS_PIANO_FLEX_KEY.element,

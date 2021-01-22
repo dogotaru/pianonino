@@ -18,6 +18,12 @@ This game has no adds and was built with "education" in mind.
 
 [https://youtu.be/HjJZJ0gXYwc](https://youtu.be/HjJZJ0gXYwc)
 
+# Install from
+
+[https://play.google.com/store/apps/details?id=com.pandasystems.pianonino](Pianonino Android)
+
+[https://apps.apple.com/us/app/pianonino/id1511820601](Pianonino Apple)
+
 # Install environment:
 ``
 npm install -g expo-cli

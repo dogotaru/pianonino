@@ -20,9 +20,9 @@ This game has no adds and was built with "education" in mind.
 
 # Install from
 
-[https://play.google.com/store/apps/details?id=com.pandasystems.pianonino](Pianonino Android)
+[Pianonino Android](https://play.google.com/store/apps/details?id=com.pandasystems.pianonino)
 
-[https://apps.apple.com/us/app/pianonino/id1511820601](Pianonino Apple)
+[Pianonino Apple](https://apps.apple.com/us/app/pianonino/id1511820601)
 
 # Install environment:
 ``
